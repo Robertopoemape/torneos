@@ -27,7 +27,7 @@ class InputText extends StatelessWidget {
           vertical: 8,
         ),
       ),
-      keyboardType: TextInputType.number,
+      keyboardType: keyboardType,
       validator: (value) => value!.isEmpty ? 'Campo requerido' : null,
     );
   }

@@ -10,7 +10,7 @@ class DrawerHeaderOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: ComColors.inf800,
+      backgroundColor: ComColors.succ500,
       elevation: 40,
       width: 340,
       child: DrawerHeader(

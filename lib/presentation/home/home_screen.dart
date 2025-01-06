@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: DrawerHeaderOptions(),
       appBar: AppBar(
-        backgroundColor: ComColors.inf800,
+        backgroundColor: ComColors.succ500,
         title: Center(
           child: Text(
             'Incio',

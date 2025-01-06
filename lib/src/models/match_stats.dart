@@ -32,4 +32,44 @@ class MatchStats {
     required this.oneTwo,
     required this.zeroTwo,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'played': played,
+      'won': won,
+      'lost': lost,
+      'setsFor': setsFor,
+      'setsAgainst': setsAgainst,
+      'diffSets': diffSets,
+      'ratioSets': ratioSets,
+      'totalPointsFor': totalPointsFor,
+      'totalPointsAgainst': totalPointsAgainst,
+      'diffPoints': diffPoints,
+      'ratioPoints': ratioPoints,
+      'twoZero': twoZero,
+      'twoOne': twoOne,
+      'oneTwo': oneTwo,
+      'zeroTwo': zeroTwo,
+    };
+  }
+
+  factory MatchStats.fromMap(Map<String, dynamic> map) {
+    return MatchStats(
+      played: map['played'],
+      won: map['won'],
+      lost: map['lost'],
+      setsFor: map['setsFor'],
+      setsAgainst: map['setsAgainst'],
+      diffSets: map['diffSets'],
+      ratioSets: map['ratioSets'],
+      totalPointsFor: map['totalPointsFor'],
+      totalPointsAgainst: map['totalPointsAgainst'],
+      diffPoints: map['diffPoints'],
+      ratioPoints: map['ratioPoints'],
+      twoZero: map['twoZero'],
+      twoOne: map['twoOne'],
+      oneTwo: map['oneTwo'],
+      zeroTwo: map['zeroTwo'],
+    );
+  }
 }

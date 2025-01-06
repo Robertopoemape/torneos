@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_torneos/presentation/score_register/controller/score_register_controller.dart';
 
 import '../../components/input_text.dart';
+import '../../core/common/common.dart';
 import '../../core/style/style.dart';
 import '../../src/models/models.dart';
 
@@ -17,283 +20,221 @@ class ScoreRegisterScreen extends StatefulWidget {
 class _ScoreRegisterScreenState extends State<ScoreRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final teamNameController = TextEditingController();
-  final playedController = TextEditingController();
-  final wonController = TextEditingController();
-  final lostController = TextEditingController();
-  final setsForController = TextEditingController();
-  final setsAgainstController = TextEditingController();
-  final diffSetsController = TextEditingController();
-  final ratioSetsController = TextEditingController();
-  final pointsForController = TextEditingController();
-  final pointsAgainstController = TextEditingController();
-  final diffPointsController = TextEditingController();
-  final ratioPointsController = TextEditingController();
-  final twoZeroController = TextEditingController();
-  final twoOneController = TextEditingController();
-  final oneTwoController = TextEditingController();
-  final zeroTwoController = TextEditingController();
-
-// Método para guardar datos en Firestore
   Future<void> saveMatchData(MatchData matchData) async {
     try {
       final firestore = FirebaseFirestore.instance;
 
-      // Serializa los datos de MatchData
-      final data = {
-        'teamName': matchData.teamName,
-        'position': matchData.position,
-        'stats': {
-          'played': matchData.stats.played,
-          'won': matchData.stats.won,
-          'lost': matchData.stats.lost,
-          'setsFor': matchData.stats.setsFor,
-          'setsAgainst': matchData.stats.setsAgainst,
-          'diffSets': matchData.stats.diffSets,
-          'ratioSets': matchData.stats.ratioSets,
-          'totalPointsFor': matchData.stats.totalPointsFor,
-          'totalPointsAgainst': matchData.stats.totalPointsAgainst,
-          'diffPoints': matchData.stats.diffPoints,
-          'ratioPoints': matchData.stats.ratioPoints,
-          'twoZero': matchData.stats.twoZero,
-          'twoOne': matchData.stats.twoOne,
-          'oneTwo': matchData.stats.oneTwo,
-          'zeroTwo': matchData.stats.zeroTwo,
-        }
-      };
+      final querySnapshot = await firestore.collection('matches').get();
+      final newPosition = querySnapshot.docs.length + 1;
 
-      // Guarda los datos en una colección "matches"
-      await firestore.collection('matches').add(data);
-      print('Datos guardados exitosamente');
+      final matchDataWithPosition = MatchData(
+        teamName: matchData.teamName,
+        position: newPosition,
+        stats: matchData.stats,
+      );
+
+      await firestore.collection('matches').add(matchDataWithPosition.toMap());
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Datos guardados exitosamente')),
+        );
+      }
     } catch (e) {
-      print('Error al guardar datos: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error al guardar datos: $e')),
+        );
+      }
     }
   }
 
-  @override
-  void dispose() {
-    teamNameController.dispose();
-    playedController.dispose();
-    wonController.dispose();
-    lostController.dispose();
-    setsForController.dispose();
-    setsAgainstController.dispose();
-    diffSetsController.dispose();
-    ratioSetsController.dispose();
-    pointsForController.dispose();
-    pointsAgainstController.dispose();
-    diffPointsController.dispose();
-    ratioPointsController.dispose();
-    twoZeroController.dispose();
-    twoOneController.dispose();
-    oneTwoController.dispose();
-    zeroTwoController.dispose();
-    super.dispose();
+  MatchData? _createMatchData() {
+    try {
+      final stats = MatchStats(
+        played: _parseInt('played'),
+        won: _parseInt('won'),
+        lost: _parseInt('lost'),
+        setsFor: _parseInt('setsFor'),
+        setsAgainst: _parseInt('setsAgainst'),
+        diffSets: _parseInt('diffSets'),
+        ratioSets: _parseDouble('ratioSets'),
+        totalPointsFor: _parseInt('pointsFor'),
+        totalPointsAgainst: _parseInt('pointsAgainst'),
+        diffPoints: _parseInt('diffPoints'),
+        ratioPoints: _parseDouble('ratioPoints'),
+        twoZero: _parseInt('twoZero'),
+        twoOne: _parseInt('twoOne'),
+        oneTwo: _parseInt('oneTwo'),
+        zeroTwo: _parseInt('zeroTwo'),
+      );
+
+      return MatchData(
+        teamName: ScoreRegisterController.controllers['teamName']!.text,
+        stats: stats,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor, verifica los campos')),
+      );
+      return null;
+    }
+  }
+
+  int _parseInt(String key) {
+    return int.tryParse(ScoreRegisterController.controllers[key]!.text) ?? 0;
+  }
+
+  double _parseDouble(String key) {
+    return double.tryParse(ScoreRegisterController.controllers[key]!.text) ??
+        0.0;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Registrar Datos'),
-      ),
-      body: Card(
-        margin: const EdgeInsets.all(16),
-        color: ComColors.inf200,
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Registrar Datos',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  InputText(
-                    controller: TextEditingController(),
-                    labelText: 'Nombre de equipo',
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 16),
-                  Text('Partidos', style: ComTextStyle.subtitle1),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'Jugados',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'Ganados',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'Perdidos',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text('Sets', style: ComTextStyle.subtitle1),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'A favor',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'En contra',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'En diferencia',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  InputText(
-                    controller: TextEditingController(),
-                    labelText: 'Ratio de sets',
-                  ),
-                  const SizedBox(height: 16),
-                  Text('Puntos', style: ComTextStyle.subtitle1),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'A favor',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'En contra',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: 'En diferencia',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  InputText(
-                    controller: TextEditingController(),
-                    labelText: 'Ratio de puntos',
-                  ),
-                  const SizedBox(height: 16),
-                  Text('Resultados detallados', style: ComTextStyle.subtitle1),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: '2 a 0',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: '2 a 1',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: '1 a 2',
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: InputText(
-                          controller: TextEditingController(),
-                          labelText: '0 a 2',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Center(
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Crea los datos de MatchStats y MatchData
-                          final stats = MatchStats(
-                            played: int.parse(playedController.text),
-                            won: int.parse(wonController.text),
-                            lost: int.parse(lostController.text),
-                            setsFor: int.parse(setsForController.text),
-                            setsAgainst: int.parse(setsAgainstController.text),
-                            diffSets: int.parse(diffSetsController.text),
-                            ratioSets: double.parse(ratioSetsController.text),
-                            totalPointsFor: int.parse(pointsForController.text),
-                            totalPointsAgainst:
-                                int.parse(pointsAgainstController.text),
-                            diffPoints: int.parse(diffPointsController.text),
-                            ratioPoints:
-                                double.parse(ratioPointsController.text),
-                            twoZero: int.parse(twoZeroController.text),
-                            twoOne: int.parse(twoOneController.text),
-                            oneTwo: int.parse(oneTwoController.text),
-                            zeroTwo: int.parse(zeroTwoController.text),
-                          );
-
-                          final matchData = MatchData(
-                            teamName: teamNameController.text,
-                            stats: stats,
-                          );
-
-                          // Llama al método para guardar en Firestore
-                          saveMatchData(matchData);
-                        }
-                      },
-                      icon: const Icon(Icons.add),
-                      label: const Text('Agregar Datos'),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+    return ChangeNotifierProvider(
+      create: (_) => ScoreRegisterController(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Registro de puntaje'),
+          centerTitle: true,
+          backgroundColor: ComColors.succ500,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildFormCard(),
+              ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildFormCard() {
+    return Card(
+      elevation: 6,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader('Registrar Datos', Icons.edit),
+              gap16,
+              _buildInput('teamName', 'Nombre de equipo', TextInputType.text),
+              gap8,
+              const Divider(),
+              _buildSection('Partidos', Icons.sports_volleyball, [
+                _buildRow(['played', 'won', 'lost'],
+                    ['Jugados', 'Ganados', 'Perdidos']),
+              ]),
+              const Divider(),
+              _buildSection('Sets', Icons.bar_chart, [
+                _buildRow(['setsFor', 'setsAgainst', 'diffSets'],
+                    ['A favor', 'En contra', 'Diferencia']),
+                gap16,
+                _buildInput('ratioSets', 'Ratio de sets', TextInputType.number),
+              ]),
+              const Divider(),
+              _buildSection('Puntos', Icons.score, [
+                _buildRow(['pointsFor', 'pointsAgainst', 'diffPoints'],
+                    ['A favor', 'En contra', 'Diferencia']),
+                gap16,
+                _buildInput(
+                    'ratioPoints', 'Ratio de puntos', TextInputType.number),
+              ]),
+              const Divider(),
+              _buildSection('Resultados detallados', Icons.table_chart, [
+                _buildRow(['twoZero', 'twoOne', 'oneTwo', 'zeroTwo'],
+                    ['2 a 0', '2 a 1', '1 a 2', '0 a 2']),
+              ]),
+              gap16,
+              Center(
+                child: SizedBox(
+                  width: double.infinity, // Ocupa todo el ancho disponible
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        final matchData = _createMatchData();
+                        if (matchData != null) {
+                          saveMatchData(matchData);
+                        }
+                      }
+                    },
+                    icon: const Icon(Icons.save),
+                    label: const Text('Guardar'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      backgroundColor: ComColors.succ500,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16),
+                      textStyle: ComTextStyle.button2,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(String title, IconData icon) {
+    return Row(
+      children: [
+        Icon(icon, color: ComColors.sec500, size: 28),
+        space8,
+        Text(title, style: ComTextStyle.h6.w700),
+      ],
+    );
+  }
+
+  Widget _buildSection(String title, IconData icon, List<Widget> children) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, color: ComColors.succ500),
+            space8,
+            Text(title, style: ComTextStyle.subtitle1),
+          ],
+        ),
+        gap8,
+        ...children,
+        gap8,
+      ],
+    );
+  }
+
+  Widget _buildRow(List<String> keys, List<String> labels) {
+    return Row(
+      children: [
+        for (int i = 0; i < keys.length; i++) ...[
+          Expanded(
+              child: _buildInput(keys[i], labels[i], TextInputType.number)),
+          if (i != keys.length - 1) const SizedBox(width: 16),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildInput(String key, String label, TextInputType keyboardType) {
+    return InputText(
+      controller: ScoreRegisterController.controllers[key]!,
+      labelText: label,
+      keyboardType: keyboardType,
     );
   }
 }
