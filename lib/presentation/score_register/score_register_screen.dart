@@ -9,9 +9,7 @@ import '../../core/style/style.dart';
 import '../../src/models/models.dart';
 
 class ScoreRegisterScreen extends StatefulWidget {
-  const ScoreRegisterScreen({required this.onAddData, super.key});
-
-  final Function(MatchData) onAddData;
+  const ScoreRegisterScreen({super.key});
 
   @override
   State<ScoreRegisterScreen> createState() => _ScoreRegisterScreenState();

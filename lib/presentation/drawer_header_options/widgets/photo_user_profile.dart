@@ -6,15 +6,9 @@ import '../../../core/core.dart';
 class PhotoUserProfile extends StatelessWidget {
   const PhotoUserProfile({
     required this.lblTitle,
-    required this.lblCode,
-    required this.code,
-    required this.onPressedOpenDrawer,
     super.key,
   });
   final String lblTitle;
-  final String lblCode;
-  final String code;
-  final VoidCallback onPressedOpenDrawer;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,13 +53,6 @@ class PhotoUserProfile extends StatelessWidget {
                     color: ComColors.inf500,
                   ),
                 ),
-              ),
-            ),
-            Positioned(
-              right: 0,
-              child: Text(
-                '$lblCode  $code',
-                style: ComTextStyle.subtitle2.w400.gsWhite,
               ),
             ),
           ],

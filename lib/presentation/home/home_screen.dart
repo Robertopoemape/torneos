@@ -7,8 +7,7 @@ import 'package:proyecto_torneos/presentation/score_register/score_register_scre
 import 'package:proyecto_torneos/presentation/home/widgets/torenos.dart';
 
 import '../../core/core.dart';
-import '../../src/models/models.dart';
-import '../drawer_header_options/drawer_header_options.dart';
+import '../drawer_header_options/drawer_menu_header.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerHeaderOptions(),
+      drawer: DrawerMenuHeader(),
       appBar: AppBar(
         backgroundColor: ComColors.succ500,
         title: Center(
@@ -39,61 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ScoreRegisterScreen(
-                      onAddData: (MatchData) {},
-                    ),
+                    builder: (context) => ScoreRegisterScreen(),
                   ),
                 );
               } else if (value == 2) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ResultTableScreen(
-                      matchData: [
-                        MatchData(
-                          position: 1,
-                          teamName: 'Equipo A',
-                          stats: MatchStats(
-                            played: 10,
-                            won: 7,
-                            lost: 3,
-                            setsFor: 21,
-                            setsAgainst: 15,
-                            diffSets: 6,
-                            ratioSets: 1.40,
-                            totalPointsFor: 600,
-                            totalPointsAgainst: 450,
-                            diffPoints: 150,
-                            ratioPoints: 1.33,
-                            twoZero: 5,
-                            twoOne: 2,
-                            oneTwo: 1,
-                            zeroTwo: 2,
-                          ),
-                        ),
-                        MatchData(
-                          position: 2,
-                          teamName: 'Equipo B',
-                          stats: MatchStats(
-                            played: 10,
-                            won: 7,
-                            lost: 3,
-                            setsFor: 21,
-                            setsAgainst: 15,
-                            diffSets: 6,
-                            ratioSets: 1.40,
-                            totalPointsFor: 600,
-                            totalPointsAgainst: 450,
-                            diffPoints: 150,
-                            ratioPoints: 1.33,
-                            twoZero: 5,
-                            twoOne: 2,
-                            oneTwo: 1,
-                            zeroTwo: 2,
-                          ),
-                        ),
-                      ],
-                    ),
+                    builder: (context) => ResultTableScreen(),
                   ),
                 );
               }
