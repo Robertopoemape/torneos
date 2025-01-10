@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../core/style/app_colors.dart';
 import '../../core/style/app_text_style.dart';
 import '../../src/src.dart';
 
@@ -20,7 +21,13 @@ class ResultTableScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Resultados'),
+        centerTitle: true,
+        backgroundColor: ComColors.succ500,
+        foregroundColor: ComColors.gsWhite,
+        title: Text(
+          'Tabla de Resultados',
+          style: ComTextStyle.h6.gsWhite,
+        ),
       ),
       body: FutureBuilder<List<MatchData>>(
         future: fetchMatchData(),
@@ -44,7 +51,6 @@ class ResultTableScreen extends StatelessWidget {
   }
 }
 
-// Widget para la tabla
 class MatchDataTable extends StatelessWidget {
   final List<MatchData> matchData;
 
@@ -56,40 +62,41 @@ class MatchDataTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         headingRowColor: WidgetStateProperty.resolveWith(
-          (states) => Colors.grey.shade300,
+          (states) => ComColors.gs600,
+        ),
+        headingTextStyle: ComTextStyle.body2.copyWith(
+          fontWeight: FontWeight.bold,
+          color: ComColors.gsWhite,
         ),
         dataRowColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected)
-              ? Colors.blue.shade50
-              : null,
+          (states) =>
+              states.contains(WidgetState.selected) ? ComColors.inf500 : null,
         ),
+        dataTextStyle: ComTextStyle.body2.copyWith(fontSize: 14),
         columnSpacing: 20,
-        headingRowHeight: 50,
-        horizontalMargin: 10,
-        border: TableBorder(
-          horizontalInside: BorderSide(
-            color: Colors.grey.shade300,
-            width: 1,
-          ),
+        headingRowHeight: 40,
+        horizontalMargin: 16,
+        border: TableBorder.symmetric(
+          inside: BorderSide(color: ComColors.gs300, width: 1),
         ),
         columns: [
-          DataColumn(label: Text('Pos.', style: ComTextStyle.body2)),
-          DataColumn(label: Text('Equipo', style: ComTextStyle.body2)),
-          DataColumn(label: Text('PJ', style: ComTextStyle.body2)),
-          DataColumn(label: Text('PG', style: ComTextStyle.body2)),
-          DataColumn(label: Text('PP', style: ComTextStyle.body2)),
-          DataColumn(label: Text('SF', style: ComTextStyle.body2)),
-          DataColumn(label: Text('SC', style: ComTextStyle.body2)),
-          DataColumn(label: Text('DFS', style: ComTextStyle.body2)),
-          DataColumn(label: Text('Ratio Sets', style: ComTextStyle.body2)),
-          DataColumn(label: Text('PTF', style: ComTextStyle.body2)),
-          DataColumn(label: Text('PTC', style: ComTextStyle.body2)),
-          DataColumn(label: Text('DFP', style: ComTextStyle.body2)),
-          DataColumn(label: Text('Ratio Puntos', style: ComTextStyle.body2)),
-          DataColumn(label: Text('2 a 0', style: ComTextStyle.body2)),
-          DataColumn(label: Text('2 a 1', style: ComTextStyle.body2)),
-          DataColumn(label: Text('1 a 2', style: ComTextStyle.body2)),
-          DataColumn(label: Text('0 a 2', style: ComTextStyle.body2)),
+          _buildColumn('Pos.'),
+          _buildColumn('Equipo'),
+          _buildColumn('PJ', isNumeric: true),
+          _buildColumn('PG', isNumeric: true),
+          _buildColumn('PP', isNumeric: true),
+          _buildColumn('SF', isNumeric: true),
+          _buildColumn('SC', isNumeric: true),
+          _buildColumn('DFS', isNumeric: true),
+          _buildColumn('Ratio Sets', isNumeric: true),
+          _buildColumn('PTF', isNumeric: true),
+          _buildColumn('PTC', isNumeric: true),
+          _buildColumn('DFP', isNumeric: true),
+          _buildColumn('Ratio Puntos', isNumeric: true),
+          _buildColumn('2 a 0', isNumeric: true),
+          _buildColumn('2 a 1', isNumeric: true),
+          _buildColumn('1 a 2', isNumeric: true),
+          _buildColumn('0 a 2', isNumeric: true),
         ],
         rows: matchData.asMap().entries.map((entry) {
           final index = entry.key;
@@ -97,7 +104,7 @@ class MatchDataTable extends StatelessWidget {
 
           return DataRow(
             color: WidgetStateProperty.resolveWith(
-              (states) => index.isEven ? Colors.grey.shade100 : null,
+              (states) => index.isEven ? ComColors.supp100 : null,
             ),
             cells: [
               DataCell(Text(data.position?.toString() ?? '-')),
@@ -123,6 +130,11 @@ class MatchDataTable extends StatelessWidget {
       ),
     );
   }
-}
 
-// Estilo de texto constante
+  DataColumn _buildColumn(String label, {bool isNumeric = false}) {
+    return DataColumn(
+      label: Text(label),
+      numeric: isNumeric,
+    );
+  }
+}

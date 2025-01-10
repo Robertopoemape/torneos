@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_torneos/presentation/score_register/controller/score_register_controller.dart';
+import 'package:proyecto_torneos/presentation/result_record/controller/score_register_controller.dart';
 
 import '../../components/input_text.dart';
 import '../../core/common/common.dart';
 import '../../core/style/style.dart';
 import '../../src/models/models.dart';
 
-class ScoreRegisterScreen extends StatefulWidget {
-  const ScoreRegisterScreen({super.key});
+class ResultRecordScreen extends StatefulWidget {
+  const ResultRecordScreen({super.key});
 
   @override
-  State<ScoreRegisterScreen> createState() => _ScoreRegisterScreenState();
+  State<ResultRecordScreen> createState() => _ResultRecordScreenState();
 }
 
-class _ScoreRegisterScreenState extends State<ScoreRegisterScreen> {
+class _ResultRecordScreenState extends State<ResultRecordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   Future<void> saveMatchData(MatchData matchData) async {
@@ -94,7 +94,7 @@ class _ScoreRegisterScreenState extends State<ScoreRegisterScreen> {
       create: (_) => ScoreRegisterController(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Registro de puntaje'),
+          title: const Text('Registro de resultado'),
           centerTitle: true,
           backgroundColor: ComColors.succ500,
         ),
