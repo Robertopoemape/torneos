@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import '../../core/common/common.dart';
 import '../../core/style/style.dart';
 import '../../src/models/models.dart';
 
+@RoutePage()
 class ResultRecordScreen extends StatefulWidget {
   const ResultRecordScreen({super.key});
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/style/style.dart';
-import 'items_expansion_title.dart';
+import 'item_expansion_title.dart';
 
 class ExpansionTitleConfig extends StatelessWidget {
   const ExpansionTitleConfig({super.key});
@@ -31,10 +31,20 @@ class ExpansionTitleConfig extends StatelessWidget {
         tilePadding: const EdgeInsets.symmetric(horizontal: 8),
         childrenPadding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          ItemsExpansionTitle(name: 'Registro de torneos'),
-          ItemsExpansionTitle(name: 'Registro de equipos'),
-          ItemsExpansionTitle(name: 'Fixture'),
-          ItemsExpansionTitle(name: 'Reportes'),
+          ItemExpansionTitle(
+            name: 'Registro de torneos',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(),
+                ),
+              );
+            },
+          ),
+          ItemExpansionTitle(name: 'Registro de equipos'),
+          ItemExpansionTitle(name: 'Fixture'),
+          ItemExpansionTitle(name: 'Reportes'),
         ],
       ),
     );

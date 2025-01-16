@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:proyecto_torneos/core/style/style.dart';
@@ -9,6 +10,7 @@ import '../../core/core.dart';
 import '../drawer_header_options/drawer_menu_header.dart';
 import '../register_statistic/volleyball_matches_screen.dart';
 
+@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,

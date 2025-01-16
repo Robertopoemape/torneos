@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../../../core/style/style.dart';
 
-class ItemsExpansionTitle extends StatelessWidget {
-  const ItemsExpansionTitle({
+class ItemExpansionTitle extends StatelessWidget {
+  const ItemExpansionTitle({
     required this.name,
+    this.onTap,
     super.key,
   });
 
   final String name;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Acción para una sub-opción
-      },
+      onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       splashColor: ComColors.act300.withOpacity(0.2),
       highlightColor: ComColors.gs200.withOpacity(0.2),
