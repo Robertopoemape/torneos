@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../components/input_text.dart';
+import '../../core/core.dart';
+
 class VolleyballMatchesScreen extends StatefulWidget {
   const VolleyballMatchesScreen({super.key});
 
   @override
-  _VolleyballMatchesScreenState createState() =>
-      _VolleyballMatchesScreenState();
+  VolleyballMatchesScreenState createState() => VolleyballMatchesScreenState();
 }
 
-class _VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
+class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _team1Controller = TextEditingController();
   final TextEditingController _team2Controller = TextEditingController();
   final List<Map<String, int>> _sets = [];
+  final List<TextEditingController> _team1PointsControllers = [];
+  final List<TextEditingController> _team2PointsControllers = [];
   int _currentSet = 1;
   final int _maxSets = 5;
-  String? _matchId; // ID del partido en Firestore
-
-  void _addSet(int team1Points, int team2Points) {
-    if (_sets.length < _currentSet) {
-      _sets.add({"team1": team1Points, "team2": team2Points});
-    } else {
-      _sets[_currentSet - 1] = {"team1": team1Points, "team2": team2Points};
-    }
-  }
+  String? _matchId;
 
   Future<void> _saveMatch() async {
     if (_sets.isEmpty) return;
@@ -53,17 +49,17 @@ class _VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
         "S1": _sets.isNotEmpty ? _sets[0]["team1"] : 0,
         "S2": _sets.length > 1 ? _sets[1]["team1"] : 0,
         "S3": _sets.length > 2 ? _sets[2]["team1"] : 0,
-        "resultado": team1Wins,
-        "puntaje": team1Wins,
-        "puntos": team1PointsTotal,
+        "result": team1Wins,
+        "score": team1Wins,
+        "point": team1PointsTotal,
       },
       "team2_details": {
         "S1": _sets.isNotEmpty ? _sets[0]["team2"] : 0,
         "S2": _sets.length > 1 ? _sets[1]["team2"] : 0,
         "S3": _sets.length > 2 ? _sets[2]["team2"] : 0,
-        "resultado": team2Wins,
-        "puntaje": team2Wins,
-        "puntos": team2PointsTotal,
+        "result": team2Wins,
+        "score": team2Wins,
+        "point": team2PointsTotal,
       },
     };
 
@@ -75,7 +71,7 @@ class _VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
             .add(matchData);
         _matchId = docRef.id; // Guardar el ID del documento
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Match created successfully!")),
+          SnackBar(content: Text("Partido creado con éxito!")),
         );
       } else {
         // Actualizar el documento existente
@@ -84,14 +80,9 @@ class _VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
             .doc(_matchId)
             .update(matchData);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Match updated successfully!")),
+          SnackBar(content: Text("Partido creado con éxito!")),
         );
       }
-
-      setState(() {
-        _sets.clear();
-        _currentSet = 1;
-      });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Error saving data: $e")),
@@ -99,11 +90,35 @@ class _VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
     }
   }
 
+  void _addControllersForSet(int index) {
+    if (_team1PointsControllers.length <= index) {
+      _team1PointsControllers.add(TextEditingController());
+      _team2PointsControllers.add(TextEditingController());
+    }
+    if (_sets.length > index) {
+      _team1PointsControllers[index].text = _sets[index]["team1"].toString();
+      _team2PointsControllers[index].text = _sets[index]["team2"].toString();
+    }
+  }
+
+  @override
+  void dispose() {
+    _team1Controller.dispose();
+    _team2Controller.dispose();
+    for (final controller in _team1PointsControllers) {
+      controller.dispose();
+    }
+    for (final controller in _team2PointsControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Volleyball Matches"),
+        title: Text("Registro de puntos volleyball"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -113,100 +128,87 @@ class _VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextFormField(
+                InputText(
                   controller: _team1Controller,
-                  decoration: InputDecoration(labelText: "Team 1 Name"),
-                  validator: (value) =>
-                      value!.isEmpty ? "Please enter Team 1 name" : null,
+                  labelText: "Equipo local",
+                  keyboardType: TextInputType.text,
                 ),
-                TextFormField(
+                gap16,
+                InputText(
                   controller: _team2Controller,
-                  decoration: InputDecoration(labelText: "Team 2 Name"),
-                  validator: (value) =>
-                      value!.isEmpty ? "Please enter Team 2 name" : null,
+                  labelText: "Equipo visitante",
+                  keyboardType: TextInputType.text,
                 ),
-                SizedBox(height: 20),
-                Column(
+                gap16,
+                Wrap(
                   children: List.generate(_currentSet, (index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Set ${index + 1} Scores"),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                decoration:
-                                    InputDecoration(labelText: "Team 1 Points"),
-                                keyboardType: TextInputType.number,
-                                validator: (value) =>
-                                    value!.isEmpty ? "Enter points" : null,
-                                onSaved: (value) {
-                                  if (value != null) {
-                                    final team1Points = int.parse(value);
-                                    final team2Points = _sets.length > index
-                                        ? _sets[index]["team2"] ?? 0
-                                        : 0;
-                                    _addSet(team1Points, team2Points);
-                                  }
-                                },
-                              ),
+                    _addControllersForSet(index);
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Text(
+                              "${index + 1} Set",
                             ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: TextFormField(
-                                decoration:
-                                    InputDecoration(labelText: "Team 2 Points"),
-                                keyboardType: TextInputType.number,
-                                validator: (value) =>
-                                    value!.isEmpty ? "Enter points" : null,
-                                onSaved: (value) {
-                                  if (value != null) {
-                                    final team2Points = int.parse(value);
-                                    final team1Points = _sets.length > index
-                                        ? _sets[index]["team1"] ?? 0
-                                        : 0;
-                                    _addSet(team1Points, team2Points);
-                                  }
-                                },
+                          ),
+                          Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 80,
+                                child: InputText(
+                                  controller: _team1PointsControllers[index],
+                                  labelText: "Puntos",
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                      ],
+                              space8,
+                              SizedBox(
+                                width: 80,
+                                child: InputText(
+                                  controller: _team2PointsControllers[index],
+                                  labelText: "Puntos",
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     );
                   }),
                 ),
+                gap16,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          setState(() {
-                            _currentSet++;
-                          });
-                        }
-                      },
-                      child: Text("Next Set"),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          setState(() {
-                            _saveMatch();
-                          });
-                        }
-                      },
-                      child: Text("Save Match"),
+                    if (_currentSet < _maxSets)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              setState(() {
+                                _currentSet++;
+                              });
+                            }
+                          },
+                          child: Text("Siguiente set"),
+                        ),
+                      ),
+                    space16,
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            setState(() {
+                              _saveMatch();
+                            });
+                          }
+                        },
+                        child: Text("Guardar"),
+                      ),
                     ),
                   ],
                 ),
