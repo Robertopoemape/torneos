@@ -16,6 +16,7 @@ class ComDropdown extends StatefulWidget {
     this.isOptional = false,
     this.onChanged,
     this.initialValue,
+    this.paddingContent = const EdgeInsets.symmetric(vertical: ds8),
     super.key,
   });
 
@@ -29,6 +30,7 @@ class ComDropdown extends StatefulWidget {
   final bool isOptional;
   final ValueChanged<String?>? onChanged;
   final String? initialValue;
+  final EdgeInsets paddingContent;
 
   @override
   State<ComDropdown> createState() => _DropdownState();
@@ -64,31 +66,32 @@ class _DropdownState extends State<ComDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        widget.messageLabel.isEmpty ? gap2 : gap8,
-        Padding(
-          padding: const EdgeInsets.only(bottom: ds2),
-          child: Row(
-            children: [
-              Text(
-                widget.messageLabel,
-                style: ComTextStyle.overline.sec600,
-              ),
-              const Spacer(),
-              if (widget.isOptional)
-                Text(
-                  '*Opcional',
-                  style: ComTextStyle.overline.gs800,
+    return Padding(
+      padding: widget.paddingContent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          widget.messageLabel.isEmpty
+              ? gap0
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: ds2),
+                  child: Row(
+                    children: [
+                      Text(
+                        widget.messageLabel,
+                        style: ComTextStyle.overline.sec600,
+                      ),
+                      const Spacer(),
+                      if (widget.isOptional)
+                        Text(
+                          '*Opcional',
+                          style: ComTextStyle.overline.gs800,
+                        ),
+                    ],
+                  ),
                 ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 48,
-          child: DropdownButtonFormField<String>(
+          DropdownButtonFormField<String>(
             value: selectedItem,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: ds16),
@@ -145,9 +148,8 @@ class _DropdownState extends State<ComDropdown> {
               }
             },
           ),
-        ),
-        gap4,
-      ],
+        ],
+      ),
     );
   }
 }
