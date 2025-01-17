@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../core/core.dart';
@@ -17,6 +15,7 @@ class ComDropdown extends StatefulWidget {
     this.onChanged,
     this.initialValue,
     this.paddingContent = const EdgeInsets.symmetric(vertical: ds8),
+    this.controller,
     super.key,
   });
 
@@ -31,37 +30,51 @@ class ComDropdown extends StatefulWidget {
   final ValueChanged<String?>? onChanged;
   final String? initialValue;
   final EdgeInsets paddingContent;
+  final TextEditingController? controller;
 
   @override
   State<ComDropdown> createState() => _DropdownState();
 }
 
 class _DropdownState extends State<ComDropdown> {
-  String? selectedItem;
   Color? borderColor;
-  TextEditingController controller = TextEditingController();
+  String? selectedValue;
+  TextEditingController? internalController;
 
   @override
   void initState() {
     super.initState();
-
-    log(widget.borderColor.toString());
     borderColor = widget.borderColor ?? ComColors.sec500;
-    log(widget.borderColor.toString());
 
-    if (widget.initialValue != null &&
-        widget.items.contains(widget.initialValue)) {
-      selectedItem = widget.initialValue;
-      controller.text = selectedItem!;
-    } else {
-      selectedItem = null;
+    // Usar un controlador externo si se proporciona, o crear uno interno
+    internalController = widget.controller ?? TextEditingController();
+
+    internalController!.addListener(() {
+      if (mounted) {
+        setState(() {
+          selectedValue = internalController!.text.isNotEmpty &&
+                  widget.items.contains(internalController!.text)
+              ? internalController!.text
+              : null;
+        });
+      }
+    });
+
+    // Inicializar el valor del controlador
+    if (internalController!.text.isNotEmpty) {
+      selectedValue = widget.items.contains(internalController!.text)
+          ? internalController!.text
+          : null;
     }
   }
 
   @override
   void dispose() {
+    // Solo eliminar el controlador si fue creado internamente
+    if (widget.controller == null) {
+      internalController?.dispose();
+    }
     super.dispose();
-    controller.dispose();
   }
 
   @override
@@ -92,7 +105,9 @@ class _DropdownState extends State<ComDropdown> {
                   ),
                 ),
           DropdownButtonFormField<String>(
-            value: selectedItem,
+            value: internalController!.text.isEmpty
+                ? null
+                : internalController!.text,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: ds16),
               label: Text(widget.label!, style: textStyle),
@@ -135,15 +150,11 @@ class _DropdownState extends State<ComDropdown> {
             onChanged: (value) {
               if (mounted) {
                 setState(() {
-                  selectedItem = value;
-                  if (value != null) {
-                    controller.text = value;
-
-                    borderColor = ComColors.succ500;
-                  } else {
-                    controller.clear();
-                  }
+                  internalController!.text = value ?? '';
+                  selectedValue = value;
+                  borderColor = ComColors.succ500;
                 });
+
                 widget.onChanged?.call(value);
               }
             },

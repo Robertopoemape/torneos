@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerDelegate: appRouter.delegate(
-        navigatorObservers: () => [
-          //CartObserver(),
-        ],
+        navigatorObservers: () => [],
       ),
       routeInformationParser: appRouter.defaultRouteParser(),
       theme: ThemeData(

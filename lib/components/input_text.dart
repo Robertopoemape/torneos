@@ -6,7 +6,7 @@ class ComInputText extends StatefulWidget {
   const ComInputText({
     required this.controller,
     required this.labelText,
-    required this.onChangedText,
+    this.onChangedText,
     this.widthBorder = ds1,
     this.borderRadius = ds8,
     this.borderColor,
@@ -21,7 +21,7 @@ class ComInputText extends StatefulWidget {
   final Color? borderColor;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
-  final Function(String) onChangedText;
+  final Function(String)? onChangedText;
   final EdgeInsets paddingContent;
 
   @override
@@ -101,7 +101,7 @@ class _ComInputTextState extends State<ComInputText> {
             }
           });
           //    }
-          widget.onChangedText(value);
+          if (widget.onChangedText != null) widget.onChangedText!(value);
         },
       ),
     );
