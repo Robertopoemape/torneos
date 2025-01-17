@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_torneos/presentation/drawer_header_options/widgets/expansion_title_config.dart';
-
-import '../../../core/common/common.dart';
-import '../../../core/style/style.dart';
+import '../../../core/core.dart';
+import 'expansion_title_config.dart';
 import 'photo_user_profile.dart';
 
 class DrawerOptions extends StatelessWidget {

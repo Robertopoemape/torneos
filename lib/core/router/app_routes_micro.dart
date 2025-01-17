@@ -11,5 +11,6 @@ class MicroAppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: HomeRoute.page, initial: true),
         AutoRoute(page: VolleyballMatchesRoute.page),
+        AutoRoute(page: ResultTableRoute.page),
       ];
 }

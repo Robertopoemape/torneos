@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../core/style/style.dart';
-import 'widgets/drawer_options.dart';
+
+import '../../../core/core.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
-class DrawerMenuHeader extends StatelessWidget {
-  const DrawerMenuHeader({super.key});
+class DrawerMenuHeaderScreen extends StatelessWidget {
+  const DrawerMenuHeaderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

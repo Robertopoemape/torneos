@@ -1,14 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'package:proyecto_torneos/core/style/style.dart';
-import 'package:proyecto_torneos/presentation/end_drawer_add/end_drawer_add.dart';
-import 'package:proyecto_torneos/presentation/result_table/result_table_screen.dart';
-import 'package:proyecto_torneos/presentation/home/widgets/torenos.dart';
+import '../../../core/core.dart';
+import '../../../core/router/router_provider_micro.gr.dart';
 
-import '../../core/core.dart';
-import '../drawer_header_options/drawer_menu_header.dart';
-import '../register_statistic/volleyball_matches_screen.dart';
+import '../../drawer_menu_header/drawer_menu_header.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -24,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerMenuHeader(),
+      drawer: DrawerMenuHeaderScreen(),
       appBar: AppBar(
         backgroundColor: ComColors.succ500,
         title: Center(
@@ -37,19 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomPopupMenu(
             onOptionSelected: (value) {
               if (value == 1) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VolleyballMatchesScreen(),
-                  ),
-                );
+                autoRouterPush(context, VolleyballMatchesRoute());
               } else if (value == 2) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultTableScreen(),
-                  ),
-                );
+                autoRouterPush(context, ResultTableRoute());
               }
             },
           ),

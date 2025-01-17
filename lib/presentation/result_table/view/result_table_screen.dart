@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../core/style/app_colors.dart';
-import '../../core/style/app_text_style.dart';
-import '../../src/src.dart';
+import '../../../core/style/app_colors.dart';
+import '../../../core/style/app_text_style.dart';
+import '../../../src/src.dart';
 
 @RoutePage()
 class ResultTableScreen extends StatelessWidget {

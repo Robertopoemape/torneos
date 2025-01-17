@@ -1,3 +1,4 @@
-export 'style/app_colors.dart';
+export 'style/style.dart';
 export 'common/common.dart';
 export 'theme/theme_data.dart';
+export 'router/router.dart';

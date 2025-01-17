@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_torneos/core/style/style.dart';
 
 import '../../../core/core.dart';
 

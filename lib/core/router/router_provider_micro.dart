@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'router_provider_micro.gr.dart';
 
-part 'app_router_micro.dart';
+part 'app_routes_micro.dart';
 
 void autoRouterPopUntil(BuildContext context, String nameRouter) {
   context.router.popUntilRouteWithName(nameRouter);

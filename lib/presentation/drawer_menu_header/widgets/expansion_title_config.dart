@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/style/style.dart';
+import '../../../core/core.dart';
 import 'item_expansion_title.dart';
 
 class ExpansionTitleConfig extends StatelessWidget {
