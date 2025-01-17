@@ -132,7 +132,7 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InputText(
+                ComInputText(
                   controller: _team1Controller,
                   labelText: "Equipo local",
                   keyboardType: TextInputType.text,
@@ -141,7 +141,7 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
                   },
                 ),
                 gap16,
-                InputText(
+                ComInputText(
                   controller: _team2Controller,
                   labelText: "Equipo visitante",
                   keyboardType: TextInputType.text,
@@ -168,7 +168,7 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
                             children: [
                               SizedBox(
                                 width: 80,
-                                child: InputText(
+                                child: ComInputText(
                                   controller: _team1PointsControllers[index],
                                   labelText: "Puntos",
                                   onChangedText: (value) {
@@ -179,7 +179,7 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
                               space8,
                               SizedBox(
                                 width: 80,
-                                child: InputText(
+                                child: ComInputText(
                                   controller: _team2PointsControllers[index],
                                   labelText: "Puntos",
                                   onChangedText: (value) {

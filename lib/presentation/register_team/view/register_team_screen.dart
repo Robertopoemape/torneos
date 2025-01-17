@@ -63,7 +63,7 @@ class _RegisterTeamScreenState extends State<RegisterTeamScreen> {
           child: ListView(
             children: [
               gap4,
-              InputText(
+              ComInputText(
                 controller: _teamNameController,
                 labelText: 'Nombre del Equipo',
                 keyboardType: TextInputType.text,
@@ -73,7 +73,7 @@ class _RegisterTeamScreenState extends State<RegisterTeamScreen> {
                 },
               ),
               gap16,
-              InputText(
+              ComInputText(
                 controller: _coachNameController,
                 labelText: 'Nombre del Entrenador',
                 keyboardType: TextInputType.text,
@@ -84,12 +84,10 @@ class _RegisterTeamScreenState extends State<RegisterTeamScreen> {
               ),
               gap16,
               Text('Registro de jugadores', style: ComTextStyle.h6),
-              gap16,
               ComDropdown(
                 items: ['DNI', 'CE'],
                 hintText: 'Tipo de Documento',
               ),
-              Text('Registro de jugadores', style: ComTextStyle.h6),
               Center(
                 child: ElevatedButton(
                   onPressed: _submitForm,

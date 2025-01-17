@@ -233,7 +233,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
   }
 
   Widget _buildInput(String key, String label, TextInputType keyboardType) {
-    return InputText(
+    return ComInputText(
       controller: ScoreRegisterController.controllers[key]!,
       labelText: label,
       keyboardType: keyboardType,

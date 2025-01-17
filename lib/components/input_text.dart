@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../core/core.dart';
 
-class InputText extends StatefulWidget {
-  const InputText({
+class ComInputText extends StatefulWidget {
+  const ComInputText({
     required this.controller,
     required this.labelText,
     required this.onChangedText,
@@ -23,10 +23,10 @@ class InputText extends StatefulWidget {
   final Function(String) onChangedText;
 
   @override
-  State<InputText> createState() => _InputTextState();
+  State<ComInputText> createState() => _ComInputTextState();
 }
 
-class _InputTextState extends State<InputText> {
+class _ComInputTextState extends State<ComInputText> {
   Color? borderColor;
   String messageLabel = '';
   TextEditingController controller = TextEditingController();
