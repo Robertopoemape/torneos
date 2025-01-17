@@ -33,16 +33,13 @@ class ExpansionTitleConfig extends StatelessWidget {
         children: [
           ItemExpansionTitle(
             name: 'Registro de torneos',
+          ),
+          ItemExpansionTitle(
+            name: 'Registro de equipos',
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Scaffold(),
-                ),
-              );
+              autoRouterPush(context, RegisterTeamRoute());
             },
           ),
-          ItemExpansionTitle(name: 'Registro de equipos'),
           ItemExpansionTitle(name: 'Fixture'),
           ItemExpansionTitle(name: 'Reportes'),
         ],

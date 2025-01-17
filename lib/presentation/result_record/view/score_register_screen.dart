@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +161,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
               gap16,
               Center(
                 child: SizedBox(
-                  width: double.infinity, // Ocupa todo el ancho disponible
+                  width: double.infinity,
                   child: ElevatedButton.icon(
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
@@ -235,6 +237,9 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
       controller: ScoreRegisterController.controllers[key]!,
       labelText: label,
       keyboardType: keyboardType,
+      onChangedText: (value) {
+        log(value);
+      },
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -134,12 +136,18 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
                   controller: _team1Controller,
                   labelText: "Equipo local",
                   keyboardType: TextInputType.text,
+                  onChangedText: (value) {
+                    log(value);
+                  },
                 ),
                 gap16,
                 InputText(
                   controller: _team2Controller,
                   labelText: "Equipo visitante",
                   keyboardType: TextInputType.text,
+                  onChangedText: (value) {
+                    log(value);
+                  },
                 ),
                 gap16,
                 Wrap(
@@ -163,6 +171,9 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
                                 child: InputText(
                                   controller: _team1PointsControllers[index],
                                   labelText: "Puntos",
+                                  onChangedText: (value) {
+                                    log(value);
+                                  },
                                 ),
                               ),
                               space8,
@@ -171,6 +182,9 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
                                 child: InputText(
                                   controller: _team2PointsControllers[index],
                                   labelText: "Puntos",
+                                  onChangedText: (value) {
+                                    log(value);
+                                  },
                                 ),
                               ),
                             ],

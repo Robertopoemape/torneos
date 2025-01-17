@@ -24,11 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: DrawerMenuHeaderScreen(),
       appBar: AppBar(
         backgroundColor: ComColors.succ500,
-        title: Center(
-          child: Text(
-            'Incio',
-            style: ComTextStyle.h6.gsWhite,
-          ),
+        centerTitle: true,
+        title: Text(
+          'Incio',
+          style: ComTextStyle.h6.gsWhite,
         ),
         actions: [
           CustomPopupMenu(
