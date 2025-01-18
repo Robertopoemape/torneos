@@ -39,6 +39,11 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
+# Ignorar archivos generados por Flutter para Linux, macOS y Windows
+linux/flutter/generated_plugin_registrant.*
+macos/flutter/generated_plugin_registrant.*
+windows/flutter/generated_plugin_registrant.*
+
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
