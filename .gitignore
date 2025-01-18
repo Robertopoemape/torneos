@@ -37,6 +37,9 @@ migrate_working_dir/
 **/flutter/GeneratedPluginRegistrant.*
 **/flutter/generated_*
 
+# VSCode config files
+.vscode/
+*.code-workspace
 
 # Symbolication related
 app.*.symbols

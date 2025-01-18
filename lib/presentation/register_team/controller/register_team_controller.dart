@@ -13,6 +13,7 @@ class RegisterTeamController with ChangeNotifier {
   final TextEditingController positionPlayerController =
       TextEditingController();
   final TextEditingController numberShirtController = TextEditingController();
+  final TextEditingController nickNameController = TextEditingController();
 
   void clearFields() {
     teamNameController.clear();
@@ -23,6 +24,7 @@ class RegisterTeamController with ChangeNotifier {
     lastNameController.clear();
     positionPlayerController.clear();
     numberShirtController.clear();
+    nickNameController.clear();
   }
 
   @override
@@ -35,6 +37,7 @@ class RegisterTeamController with ChangeNotifier {
     lastNameController.dispose();
     positionPlayerController.dispose();
     numberShirtController.dispose();
+    nickNameController.dispose();
     super.dispose();
   }
 }

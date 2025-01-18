@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../components/components.dart';
 import '../../../core/core.dart';
 import '../controller/register_team_controller.dart';
+import '../widgets/show_selection_dialog.dart';
 import 'register_team_vm.dart';
 
 class RegisterTeamScreen extends StatelessWidget {
@@ -84,7 +85,7 @@ class RegisterTeamScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: ComInputText(
-                            controller: controller.nameController,
+                            controller: controller.nickNameController,
                             labelText: 'Nick name',
                             keyboardType: TextInputType.text,
                           ),
@@ -95,7 +96,6 @@ class RegisterTeamScreen extends StatelessWidget {
                           child: ComInputText(
                             controller: controller.numberShirtController,
                             labelText: 'Nº Camiseta',
-                            keyboardType: TextInputType.text,
                           ),
                         ),
                       ],
@@ -115,7 +115,7 @@ class RegisterTeamScreen extends StatelessWidget {
                             ],
                             hintText: 'Posición del jugador',
                             onChanged: (value) {
-                              viewModel.selectedDocumentType = value;
+                              viewModel.selectedPositionPlayer = value;
                             },
                           ),
                         ),
@@ -124,40 +124,16 @@ class RegisterTeamScreen extends StatelessWidget {
                           height: 48,
                           child: ElevatedButton(
                             onPressed: () {
-                              /* Future<void> showSelectionDialog(
-  BuildContext context,
-  IntimateViewModel viewModel,
-) =>*/
-                              showDialog(
+                              showSelectionDialog(
                                   context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                          title: Text(
-                                            'Selecciona una opción para subir tu foto.',
-                                            style: ComTextStyle.body2.sec500,
-                                          ),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: <Widget>[
-                                                GestureDetector(
-                                                  child: Text('Galería'),
-                                                  onTap: () {
-                                                    viewModel.openGallery();
-                                                    Navigator.pop(context);
-                                                  },
-                                                ),
-                                                Padding(
-                                                    padding: EdgeInsets.all(8)),
-                                                GestureDetector(
-                                                  child: Text('Camara'),
-                                                  onTap: () {
-                                                    viewModel.openCamera();
-                                                    Navigator.pop(context);
-                                                  },
-                                                )
-                                              ],
-                                            ),
-                                          )));
+                                  onTapGalery: () {
+                                    viewModel.openGallery();
+                                    autoRouterPop(context);
+                                  },
+                                  onTapCamera: () {
+                                    viewModel.openCamera();
+                                    autoRouterPop(context);
+                                  });
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 5,

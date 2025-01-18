@@ -16,6 +16,7 @@ class RegisterTeamVm with ChangeNotifier {
   final ImagePicker picker = ImagePicker();
   final List<PlayerData> players = [];
   String? selectedDocumentType;
+  String? selectedPositionPlayer;
 
   File? _imgFileUpload;
   File? get imgFileUpload => _imgFileUpload;
@@ -29,12 +30,14 @@ class RegisterTeamVm with ChangeNotifier {
   Future<void> addTeam() async {
     if (validateForm()) {
       final newPlayer = PlayerData(
-        documentType: selectedDocumentType,
+        documentType: selectedDocumentType!,
         documentNumber: _controller.numberDocumentController.text,
         name: _controller.nameController.text,
         lastName: _controller.lastNameController.text,
+        nickName: _controller.nickNameController.text,
         shirtNumber: _controller.numberShirtController.text,
         positionPlayer: _controller.positionPlayerController.text,
+        imageUrl: _imgFileUpload?.path ?? '',
         createDate: DateTime.now(),
         modifiedDate: DateTime.now(),
       );
