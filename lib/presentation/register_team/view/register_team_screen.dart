@@ -36,10 +36,18 @@ class RegisterTeamScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: ListView(
                   children: [
-                    _buildInput(
-                        controller.teamNameController, 'Nombre del Equipo'),
-                    _buildInput(controller.coachNameController,
-                        'Nombre del Entrenador'),
+                    ComInputText(
+                      controller: controller.teamNameController,
+                      labelText: 'Nombre del Equipo',
+                      keyboardType: TextInputType.text,
+                      borderColor: ComColors.acce300,
+                    ),
+                    ComInputText(
+                      controller: controller.coachNameController,
+                      labelText: 'Nombre del Entrenador',
+                      keyboardType: TextInputType.text,
+                      borderColor: ComColors.acce300,
+                    ),
                     Text('Registro de jugadores', style: ComTextStyle.h6),
                     Row(
                       children: [
@@ -55,16 +63,83 @@ class RegisterTeamScreen extends StatelessWidget {
                         ),
                         space16,
                         Expanded(
-                          child: _buildInput(
-                              controller.numberDocumentController,
-                              'Número de Documento'),
+                          child: ComInputText(
+                            controller: controller.numberDocumentController,
+                            labelText: 'Número de Documento',
+                          ),
                         ),
                       ],
                     ),
-                    _buildInput(controller.nameController, 'Nombres'),
-                    _buildInput(controller.lastNameController, 'Apellidos'),
-                    _buildInput(
-                        controller.numberShirtController, 'Número de camiseta'),
+                    ComInputText(
+                      controller: controller.lastNameController,
+                      labelText: 'Nombres',
+                      keyboardType: TextInputType.text,
+                    ),
+                    ComInputText(
+                      controller: controller.nameController,
+                      labelText: 'Apellidos',
+                      keyboardType: TextInputType.text,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ComInputText(
+                            controller: controller.nameController,
+                            labelText: 'Nick name',
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                        space16,
+                        SizedBox(
+                          width: 110,
+                          child: ComInputText(
+                            controller: controller.numberShirtController,
+                            labelText: 'Nº Camiseta',
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ComDropdown(
+                            controller: controller.positionPlayerController,
+                            items: [
+                              'Defensa derecha',
+                              'Armador',
+                              'Central',
+                              'Atacante punta',
+                              'Defensa izquierda',
+                              'Defensa central'
+                            ],
+                            hintText: 'Posición del jugador',
+                            onChanged: (value) {
+                              viewModel.selectedDocumentType = value;
+                            },
+                          ),
+                        ),
+                        space16,
+                        SizedBox(
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              elevation: 5,
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: ComColors.sec500,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Center(
                       child: ElevatedButton(
                         onPressed: viewModel.addTeam,
@@ -83,15 +158,6 @@ class RegisterTeamScreen extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-
-  Widget _buildInput(TextEditingController controller, String label) {
-    return ComInputText(
-      controller: controller,
-      labelText: label,
-      keyboardType: TextInputType.text,
-      borderColor: ComColors.acce300,
     );
   }
 }

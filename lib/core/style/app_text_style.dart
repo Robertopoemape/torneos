@@ -24,6 +24,7 @@ const double _display24Size = 24;
 const double _display20Size = 20;
 const double _display16Size = 16;
 const double _display14Size = 14;
+const double _display13Size = 13;
 const double _display12Size = 12;
 const double _display10Size = 10;
 
@@ -216,6 +217,10 @@ abstract class ComTextStyle {
   );
   static TextStyle body2 = textStyle.copyWith(
     fontSize: _display14Size,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle body3 = textStyle.copyWith(
+    fontSize: _display13Size,
     fontWeight: FontWeight.w500,
   );
   static TextStyle button1 = textStyle.copyWith(

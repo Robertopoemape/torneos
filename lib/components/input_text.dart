@@ -55,6 +55,7 @@ class _ComInputTextState extends State<ComInputText> {
       padding: widget.paddingContent,
       child: TextFormField(
         controller: widget.controller,
+        style: ComTextStyle.body3.w400.gs1000,
         decoration: InputDecoration(
           labelText: widget.labelText,
           labelStyle: ComTextStyle.caption.gs800,
@@ -85,7 +86,6 @@ class _ComInputTextState extends State<ComInputText> {
           ),
         ),
         keyboardType: widget.keyboardType,
-        validator: (value) => value!.isEmpty ? 'Campo requerido' : null,
         onChanged: (value) {
           //   if (!widget.isOptionalField) {
           setState(() {

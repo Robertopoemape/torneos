@@ -9,6 +9,9 @@ class RegisterTeamController with ChangeNotifier {
       TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
+
+  final TextEditingController positionPlayerController =
+      TextEditingController();
   final TextEditingController numberShirtController = TextEditingController();
 
   void clearFields() {
@@ -18,6 +21,7 @@ class RegisterTeamController with ChangeNotifier {
     numberDocumentController.clear();
     nameController.clear();
     lastNameController.clear();
+    positionPlayerController.clear();
     numberShirtController.clear();
   }
 
@@ -29,6 +33,7 @@ class RegisterTeamController with ChangeNotifier {
     numberDocumentController.dispose();
     nameController.dispose();
     lastNameController.dispose();
+    positionPlayerController.dispose();
     numberShirtController.dispose();
     super.dispose();
   }

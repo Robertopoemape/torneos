@@ -46,7 +46,6 @@ class _DropdownState extends State<ComDropdown> {
     super.initState();
     borderColor = widget.borderColor ?? ComColors.sec500;
 
-    // Usar un controlador externo si se proporciona, o crear uno interno
     internalController = widget.controller ?? TextEditingController();
 
     internalController!.addListener(() {
@@ -60,7 +59,6 @@ class _DropdownState extends State<ComDropdown> {
       }
     });
 
-    // Inicializar el valor del controlador
     if (internalController!.text.isNotEmpty) {
       selectedValue = widget.items.contains(internalController!.text)
           ? internalController!.text
@@ -70,7 +68,6 @@ class _DropdownState extends State<ComDropdown> {
 
   @override
   void dispose() {
-    // Solo eliminar el controlador si fue creado internamente
     if (widget.controller == null) {
       internalController?.dispose();
     }
@@ -108,9 +105,13 @@ class _DropdownState extends State<ComDropdown> {
             value: internalController!.text.isEmpty
                 ? null
                 : internalController!.text,
+            style: textStyle,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: ds16),
-              label: Text(widget.label!, style: textStyle),
+              label: Text(
+                widget.label!,
+                style: textStyle,
+              ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: borderColor!,

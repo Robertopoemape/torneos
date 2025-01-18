@@ -4,6 +4,7 @@ class PlayerData {
   final String name;
   final String lastName;
   final String shirtNumber;
+  final String positionPlayer;
   final DateTime createDate;
   final DateTime modifiedDate;
 
@@ -13,6 +14,7 @@ class PlayerData {
     required this.name,
     required this.lastName,
     required this.shirtNumber,
+    required this.positionPlayer,
     required this.createDate,
     required this.modifiedDate,
   });
@@ -24,6 +26,7 @@ class PlayerData {
       'name': name,
       'lastName': lastName,
       'shirtNumber': shirtNumber,
+      'positionPlayer': positionPlayer,
       'createDate': createDate.toIso8601String(),
       'modifiedDate': modifiedDate.toIso8601String(),
     };
@@ -36,6 +39,7 @@ class PlayerData {
       name: map['name'],
       lastName: map['lastName'],
       shirtNumber: map['shirtNumber'],
+      positionPlayer: map['positionPlayer'],
       createDate: DateTime.parse(map['createDate']),
       modifiedDate: DateTime.parse(map['modifiedDate']),
     );

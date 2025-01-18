@@ -33,15 +33,16 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Flutter-generated plugin files for all platforms
+**/flutter/GeneratedPluginRegistrant.*
+**/flutter/generated_*
+
+
 # Symbolication related
 app.*.symbols
 
 # Obfuscation related
 app.*.map.json
-
-# Ignorar archivos generados por Flutter para Linux, macOS y Windows
-linux/flutter/generated_plugin*
-
 
 # Android Studio will place build artifacts here
 /android/app/debug
