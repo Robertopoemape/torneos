@@ -41,13 +41,11 @@ class RegisterTeamScreen extends StatelessWidget {
                       controller: controller.teamNameController,
                       labelText: 'Nombre del Equipo',
                       keyboardType: TextInputType.text,
-                      borderColor: ComColors.acce300,
                     ),
                     ComInputText(
                       controller: controller.coachNameController,
                       labelText: 'Nombre del Entrenador',
                       keyboardType: TextInputType.text,
-                      borderColor: ComColors.acce300,
                     ),
                     Text('Registro de jugadores', style: ComTextStyle.h6),
                     Row(
@@ -72,12 +70,12 @@ class RegisterTeamScreen extends StatelessWidget {
                       ],
                     ),
                     ComInputText(
-                      controller: controller.lastNameController,
+                      controller: controller.nameController,
                       labelText: 'Nombres',
                       keyboardType: TextInputType.text,
                     ),
                     ComInputText(
-                      controller: controller.nameController,
+                      controller: controller.lastNameController,
                       labelText: 'Apellidos',
                       keyboardType: TextInputType.text,
                     ),

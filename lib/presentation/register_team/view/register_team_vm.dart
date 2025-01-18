@@ -104,6 +104,7 @@ class RegisterTeamVm with ChangeNotifier {
 
   void clearPlayerFields() {
     selectedDocumentType = null;
+    selectedPositionPlayer = null;
     _controller.clearFields();
     notifyListeners();
   }

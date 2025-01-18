@@ -31,22 +31,31 @@ class ComInputText extends StatefulWidget {
 class _ComInputTextState extends State<ComInputText> {
   Color? borderColor;
   String messageLabel = '';
-  TextEditingController controller = TextEditingController();
+  TextEditingController? internalController;
 
   @override
   void initState() {
     super.initState();
-    if (widget.controller != null || widget.controller!.text.isEmpty) {
-      borderColor = ComColors.sec500;
-    } else {
-      borderColor = widget.borderColor ?? ComColors.sec500;
-    }
+    borderColor = widget.borderColor ?? ComColors.sec500;
+    internalController = widget.controller ?? TextEditingController();
+
+    internalController!.addListener(() {
+      if (mounted) {
+        setState(() {
+          if (internalController!.text.isEmpty) {
+            borderColor = ComColors.sec500;
+          }
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
+    if (widget.controller == null) {
+      internalController?.dispose();
+    }
     super.dispose();
-    controller.dispose();
   }
 
   @override
@@ -91,7 +100,7 @@ class _ComInputTextState extends State<ComInputText> {
           setState(() {
             // valueLabel = value;
             if (value.isNotEmpty) {
-              borderColor = ComColors.pri600;
+              borderColor = ComColors.succ500;
               //   messageLabel = widget.successLabel;
               //isError = false;
             } else {

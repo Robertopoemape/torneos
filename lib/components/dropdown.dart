@@ -51,10 +51,14 @@ class _DropdownState extends State<ComDropdown> {
     internalController!.addListener(() {
       if (mounted) {
         setState(() {
-          selectedValue = internalController!.text.isNotEmpty &&
-                  widget.items.contains(internalController!.text)
-              ? internalController!.text
-              : null;
+          if (internalController!.text.isEmpty) {
+            borderColor = ComColors.sec500;
+          } else {
+            selectedValue = internalController!.text.isNotEmpty &&
+                    widget.items.contains(internalController!.text)
+                ? internalController!.text
+                : null;
+          }
         });
       }
     });
