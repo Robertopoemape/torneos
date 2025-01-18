@@ -40,9 +40,8 @@ app.*.symbols
 app.*.map.json
 
 # Ignorar archivos generados por Flutter para Linux, macOS y Windows
-linux/flutter/generated_plugin_registrant.*
-macos/flutter/generated_plugin_registrant.*
-windows/flutter/generated_plugin_registrant.*
+linux/flutter/generated_plugin*
+
 
 # Android Studio will place build artifacts here
 /android/app/debug
