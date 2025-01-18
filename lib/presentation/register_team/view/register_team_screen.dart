@@ -120,6 +120,7 @@ class RegisterTeamScreen extends StatelessWidget {
                         space16,
                         SizedBox(
                           height: 48,
+                          width: 50,
                           child: ElevatedButton(
                             onPressed: () {
                               showSelectionDialog(
@@ -137,7 +138,7 @@ class RegisterTeamScreen extends StatelessWidget {
                               elevation: 5,
                               padding: EdgeInsets.zero,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(25),
                               ),
                             ),
                             child: Icon(
@@ -148,6 +149,13 @@ class RegisterTeamScreen extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    BirthDatePicker(
+                      labelText: 'Fecha de nacimiento',
+                      initialDate: DateTime(2000, 1, 1),
+                      onDateSelected: (date) {
+                        if (date != null) {}
+                      },
                     ),
                     if (viewModel.imgFileUpload != null)
                       Padding(

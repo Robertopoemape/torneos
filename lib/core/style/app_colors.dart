@@ -90,12 +90,12 @@ class ComColors {
   static const Color err100 = Color(0xFFF8E8E8);
   static const Color err300 = Color(0xFFE3A3A3);
   static const Color err400 = Color(0xFFD67676);
-  static const Color err500 = Color(0xFFC84848);
-  static const Color err600 = Color(0xFFBA1A1A);
-  static const Color err700 = Color(0xFF951515);
-  static const Color err800 = Color(0xFF701010);
-  static const Color err900 = Color(0xFF4A0A0A);
-  static const Color err1000 = Color(0xFF250505);
+  static const Color err500 = Color(0xFFFF0000);
+  static const Color err600 = Color(0xFFC84848);
+  static const Color err700 = Color(0xFFBA1A1A);
+  static const Color err800 = Color(0xFF951515);
+  static const Color err900 = Color(0xFF701010);
+  static const Color err1000 = Color(0xFF4A0A0A);
 
   // This color refers to the INFORMATION Colors.blue
   static const Color inf100 = Color(0xFFF2F7FE);

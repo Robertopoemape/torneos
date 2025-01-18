@@ -8,7 +8,7 @@ class ComDropdown extends StatefulWidget {
     this.borderColor,
     this.label = '',
     this.messageLabel = '',
-    this.widthBorder = 1,
+    this.widthBorder = ds1,
     this.hintText = 'Selecciona una opción',
     this.borderRadius = ds8,
     this.isOptional = false,

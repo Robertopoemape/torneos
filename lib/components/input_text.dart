@@ -105,7 +105,7 @@ class _ComInputTextState extends State<ComInputText> {
               //isError = false;
             } else {
               messageLabel = 'Este campo no puede estar vacío';
-              borderColor = ComColors.err600;
+              borderColor = ComColors.err500;
               //    isError = true;
             }
           });
