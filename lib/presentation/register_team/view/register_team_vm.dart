@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../src/models/player_data.dart';
 import '../controller/register_team_controller.dart';
@@ -51,35 +52,46 @@ class RegisterTeamVm with ChangeNotifier {
     }
   }
 
+  Future<bool> requestCameraPermission() async {
+    var statusCamera = await Permission.camera.request();
+    if (statusCamera.isGranted) {
+      log("Permiso concedido para la cámara");
+      return true;
+    } else {
+      log("Permiso no concedido para la cámara");
+      await openPermissionSettings();
+      return false;
+    }
+  }
+
   Future<void> openGallery() async {
-    XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
-
-    imgFileUpload = File(imageFile!.path);
-
-    /*await Navigator.push(
-      context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => CameraUpload(
-          viewModel: viewModel,
-        ),
-      ),
-    );*/
+    if (await requestCameraPermission()) {
+      final picker = ImagePicker();
+      XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
+      if (imageFile != null) {
+        imgFileUpload = File(imageFile.path);
+        log("Imagen seleccionada: ${imageFile.path}");
+      } else {
+        log("No se seleccionó imagen");
+      }
+    }
   }
 
   Future<void> openCamera() async {
-    XFile? imageFile = await picker.pickImage(source: ImageSource.camera);
-    if (imageFile != null) {
-      imgFileUpload = File(imageFile.path);
-
-      /* await Navigator.push(
-        context,
-        MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => CameraUpload(
-            viewModel: viewModel,
-          ),
-        ),
-      );*/
+    if (await requestCameraPermission()) {
+      final picker = ImagePicker();
+      XFile? imageFile = await picker.pickImage(source: ImageSource.camera);
+      if (imageFile != null) {
+        imgFileUpload = File(imageFile.path);
+        log("Imagen capturada: ${imageFile.path}");
+      } else {
+        log("No se capturó imagen");
+      }
     }
+  }
+
+  Future<void> openPermissionSettings() async {
+    await openAppSettings();
   }
 
   void removePlayer(int index) {

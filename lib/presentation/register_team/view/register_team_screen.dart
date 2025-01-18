@@ -123,7 +123,42 @@ class RegisterTeamScreen extends StatelessWidget {
                         SizedBox(
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              /* Future<void> showSelectionDialog(
+  BuildContext context,
+  IntimateViewModel viewModel,
+) =>*/
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                          title: Text(
+                                            'Selecciona una opción para subir tu foto.',
+                                            style: ComTextStyle.body2.sec500,
+                                          ),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                GestureDetector(
+                                                  child: Text('Galería'),
+                                                  onTap: () {
+                                                    viewModel.openGallery();
+                                                    Navigator.pop(context);
+                                                  },
+                                                ),
+                                                Padding(
+                                                    padding: EdgeInsets.all(8)),
+                                                GestureDetector(
+                                                  child: Text('Camara'),
+                                                  onTap: () {
+                                                    viewModel.openCamera();
+                                                    Navigator.pop(context);
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          )));
+                            },
                             style: ElevatedButton.styleFrom(
                               elevation: 5,
                               padding: EdgeInsets.zero,
@@ -140,6 +175,17 @@ class RegisterTeamScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    if (viewModel.imgFileUpload != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.file(
+                            viewModel.imgFileUpload!,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     Center(
                       child: ElevatedButton(
                         onPressed: viewModel.addTeam,
