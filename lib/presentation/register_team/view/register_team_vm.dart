@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../src/models/player_data.dart';
@@ -26,10 +27,20 @@ class RegisterTeamVm with ChangeNotifier {
   }
 
   bool validateForm() => _controller.formKey.currentState?.validate() ?? false;
-
   Future<void> addTeam() async {
-    if (validateForm()) {
+    try {
+      DocumentReference teamRef =
+          await FirebaseFirestore.instance.collection('teams').add({
+        'name': _controller.nameController.text,
+        'coach': _controller.coachNameController.text,
+        'createDate': DateTime.now(),
+        'modifiedDate': DateTime.now(),
+      });
+
+      String teamId = teamRef.id;
+
       final newPlayer = PlayerData(
+        teamId: teamId,
         documentType: _controller.typeDocumentController.text,
         documentNumber: _controller.numberDocumentController.text,
         name: _controller.nameController.text,
@@ -37,21 +48,44 @@ class RegisterTeamVm with ChangeNotifier {
         nickName: _controller.nickNameController.text,
         shirtNumber: _controller.numberShirtController.text,
         positionPlayer: _controller.positionPlayerController.text,
-        imageUrl: _imgFileUpload?.path ?? '',
+        imageUrl: imgFileUpload?.path ?? '',
         createDate: DateTime.now(),
         modifiedDate: DateTime.now(),
       );
 
-      try {
-        await FirebaseFirestore.instance
-            .collection('team')
-            .add(newPlayer.toMap());
-        players.add(newPlayer);
-        clearPlayerFields();
-        notifyListeners();
-      } catch (e) {
-        log("Error al guardar el jugador: $e");
-      }
+      saveImageLocally();
+
+      await FirebaseFirestore.instance
+          .collection('players')
+          .add(newPlayer.toMap());
+
+      await teamRef.update({
+        'players': FieldValue.arrayUnion([newPlayer.toMap()]),
+      });
+
+      clearPlayerFields();
+      notifyListeners();
+    } catch (e) {
+      log("Error al guardar el jugador con la URL de la imagen: $e");
+    }
+  }
+
+  Future<void> saveImageLocally() async {
+    if (_imgFileUpload == null) return;
+
+    try {
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+      String appDocPath = appDocDir.path;
+
+      String fileName =
+          '${DateTime.now().millisecondsSinceEpoch}.png'; // Nombre único basado en timestamp
+      String filePath = '$appDocPath/$fileName';
+
+      File localFile = await _imgFileUpload!.copy(filePath);
+
+      log("Imagen guardada localmente en: ${localFile.path}");
+    } catch (e) {
+      log("Error al guardar la imagen localmente: $e");
     }
   }
 
@@ -69,7 +103,6 @@ class RegisterTeamVm with ChangeNotifier {
 
   Future<void> openGallery() async {
     if (await requestCameraPermission()) {
-      final picker = ImagePicker();
       XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
       if (imageFile != null) {
         imgFileUpload = File(imageFile.path);
@@ -82,7 +115,6 @@ class RegisterTeamVm with ChangeNotifier {
 
   Future<void> openCamera() async {
     if (await requestCameraPermission()) {
-      final picker = ImagePicker();
       XFile? imageFile = await picker.pickImage(source: ImageSource.camera);
       if (imageFile != null) {
         imgFileUpload = File(imageFile.path);

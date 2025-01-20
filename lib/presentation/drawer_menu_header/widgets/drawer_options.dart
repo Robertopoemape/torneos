@@ -4,14 +4,17 @@ import 'expansion_title_config.dart';
 import 'photo_user_profile.dart';
 
 class DrawerOptions extends StatelessWidget {
-  final List<String> options;
-  final VoidCallback onLogout;
-
   const DrawerOptions({
     super.key,
     required this.options,
     required this.onLogout,
+    required this.playerPhotoUrl,
+    required this.name,
   });
+  final List<String> options;
+  final VoidCallback onLogout;
+  final String playerPhotoUrl;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,8 @@ class DrawerOptions extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         PhotoUserProfile(
-          lblTitle: 'Imagen',
+          lblTitle: name,
+          playerPhotoUrl: playerPhotoUrl,
         ),
         gap16,
         Divider(

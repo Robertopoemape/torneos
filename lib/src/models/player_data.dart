@@ -9,8 +9,10 @@ class PlayerData {
   final String imageUrl;
   final DateTime createDate;
   final DateTime modifiedDate;
+  final String teamId;
 
   PlayerData({
+    required this.teamId,
     required this.documentType,
     required this.documentNumber,
     required this.name,
@@ -25,6 +27,7 @@ class PlayerData {
 
   Map<String, dynamic> toMap() {
     return {
+      'teamId': teamId,
       'documentType': documentType,
       'documentNumber': documentNumber,
       'name': name,
@@ -40,6 +43,7 @@ class PlayerData {
 
   factory PlayerData.fromMap(Map<String, dynamic> map) {
     return PlayerData(
+      teamId: map['teamId'],
       documentType: map['documentType'],
       documentNumber: map['documentNumber'],
       name: map['name'],

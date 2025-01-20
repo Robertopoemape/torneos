@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../../core/core.dart';
@@ -5,9 +7,11 @@ import '../../../core/core.dart';
 class PhotoUserProfile extends StatelessWidget {
   const PhotoUserProfile({
     required this.lblTitle,
+    required this.playerPhotoUrl,
     super.key,
   });
   final String lblTitle;
+  final String playerPhotoUrl;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,17 +43,16 @@ class PhotoUserProfile extends StatelessWidget {
         ),
         Stack(
           children: [
-            const Center(
+            Center(
               child: CircleAvatar(
                 backgroundColor: ComColors.succ500,
                 radius: 120,
                 child: CircleAvatar(
                   backgroundColor: ComColors.gs200,
                   radius: 110,
-                  child: Icon(
-                    Icons.person,
-                    size: 200,
-                    color: ComColors.inf500,
+                  child: CircleAvatar(
+                    backgroundImage: FileImage(File(playerPhotoUrl)),
+                    radius: 105,
                   ),
                 ),
               ),
