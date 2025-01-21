@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +8,7 @@ import '../controller/register_team_controller.dart';
 import '../widgets/show_selection_dialog.dart';
 import 'register_team_vm.dart';
 
+@RoutePage()
 class RegisterTeamScreen extends StatelessWidget {
   const RegisterTeamScreen({super.key});
 

@@ -1,4 +1,5 @@
 class PlayerData {
+  final String teamId;
   final String documentType;
   final String documentNumber;
   final String name;
@@ -9,7 +10,6 @@ class PlayerData {
   final String imageUrl;
   final DateTime createDate;
   final DateTime modifiedDate;
-  final String teamId;
 
   PlayerData({
     required this.teamId,
@@ -41,19 +41,19 @@ class PlayerData {
     };
   }
 
-  factory PlayerData.fromMap(Map<String, dynamic> map) {
+  factory PlayerData.fromMap(Map<String, dynamic> json) {
     return PlayerData(
-      teamId: map['teamId'],
-      documentType: map['documentType'],
-      documentNumber: map['documentNumber'],
-      name: map['name'],
-      lastName: map['lastName'],
-      shirtNumber: map['shirtNumber'],
-      nickName: map['nickName'],
-      positionPlayer: map['positionPlayer'],
-      imageUrl: map['imageUrl'],
-      createDate: DateTime.parse(map['createDate']),
-      modifiedDate: DateTime.parse(map['modifiedDate']),
+      teamId: json['teamId'],
+      documentType: json['documentType'],
+      documentNumber: json['documentNumber'],
+      name: json['name'],
+      lastName: json['lastName'],
+      shirtNumber: json['shirtNumber'],
+      nickName: json['nickName'],
+      positionPlayer: json['positionPlayer'],
+      imageUrl: json['imageUrl'],
+      createDate: DateTime.parse(json['createDate']),
+      modifiedDate: DateTime.parse(json['modifiedDate']),
     );
   }
 }

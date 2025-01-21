@@ -132,22 +132,14 @@ class VolleyballMatchesScreenState extends State<VolleyballMatchesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ComInputText(
-                  controller: _team1Controller,
-                  labelText: "Equipo local",
-                  keyboardType: TextInputType.text,
-                  onChangedText: (value) {
-                    log(value);
-                  },
+                Text('Registro de jugadores', style: ComTextStyle.h6),
+                ComDropdown(
+                  items: [''],
+                  hintText: 'Nombre del Equipo',
                 ),
-                gap16,
-                ComInputText(
-                  controller: _team2Controller,
-                  labelText: "Equipo visitante",
-                  keyboardType: TextInputType.text,
-                  onChangedText: (value) {
-                    log(value);
-                  },
+                ComDropdown(
+                  items: [''],
+                  hintText: 'Nombre del Entrenador',
                 ),
                 gap16,
                 Wrap(
