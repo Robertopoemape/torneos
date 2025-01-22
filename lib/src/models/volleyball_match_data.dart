@@ -1,45 +1,49 @@
 class VolleyballMatch {
-  final String id;
+  final String tournamentId;
   final String nameLocal;
   final String nameVisitant;
   final List<SetScore> sets;
   final TeamDetails localTeamDetails;
   final TeamDetails visitantTeamDetails;
-  final DateTime date;
+  final DateTime createDate;
+  final DateTime modifiedDate;
 
   VolleyballMatch({
-    required this.id,
+    required this.tournamentId,
     required this.nameLocal,
     required this.nameVisitant,
     required this.sets,
     required this.localTeamDetails,
     required this.visitantTeamDetails,
-    required this.date,
+    required this.createDate,
+    required this.modifiedDate,
   });
 
   factory VolleyballMatch.fromJson(Map<String, dynamic> json, String id) {
     var setsFromJson =
         (json['sets'] as List).map((set) => SetScore.fromJson(set)).toList();
     return VolleyballMatch(
-      id: id,
+      tournamentId: json['tournamentId'],
       nameLocal: json['nameLocal'],
       nameVisitant: json['nameVisitant'],
       sets: setsFromJson,
-      localTeamDetails: TeamDetails.fromJson(json['team1_details']),
-      visitantTeamDetails: TeamDetails.fromJson(json['team2_details']),
-      date: DateTime.parse(json['date']),
+      localTeamDetails: TeamDetails.fromJson(json['localTeamDetails']),
+      visitantTeamDetails: TeamDetails.fromJson(json['visitantTeamDetails']),
+      createDate: DateTime.parse(json['createDate']),
+      modifiedDate: DateTime.parse(json['modifiedDate']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'tournamentId': tournamentId,
       'nameLocal': nameLocal,
       'nameVisitant': nameVisitant,
       'sets': sets.map((set) => set.toJson()).toList(),
       'localTeamDetails': localTeamDetails.toJson(),
       'visitantTeamDetails': visitantTeamDetails.toJson(),
-      'date': date.toIso8601String(),
+      'createDate': createDate.toIso8601String(),
+      'modifiedDate': modifiedDate.toIso8601String(),
     };
   }
 }

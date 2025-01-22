@@ -5,9 +5,18 @@ import '../../../src/models/models.dart';
 import '../controller/volleyball_matches_controller.dart';
 
 class VolleyballMatchesVm with ChangeNotifier {
-  VolleyballMatchesVm(this._controller);
-
+  VolleyballMatchesVm(
+    this._controller,
+    this.tournamentId,
+    this.localTeam,
+    this.visitantTeam,
+  ) {
+    initState();
+  }
   final VolleyballMatchesController _controller;
+  final String tournamentId;
+  final String localTeam;
+  final String visitantTeam;
 
   final List<SetScore> sets = [];
 
@@ -19,6 +28,11 @@ class VolleyballMatchesVm with ChangeNotifier {
   set currentSets(int value) {
     _currentSets = value;
     notifyListeners();
+  }
+
+  void initState() {
+    _controller.localTeamController.text = localTeam;
+    _controller.visitantTeamController.text = visitantTeam;
   }
 
   void incrementSet(int currentSet) {
@@ -66,13 +80,14 @@ class VolleyballMatchesVm with ChangeNotifier {
     );
 
     final match = VolleyballMatch(
-      id: _matchId ?? '',
+      tournamentId: tournamentId,
       nameLocal: _controller.localTeamController.text,
       nameVisitant: _controller.visitantTeamController.text,
       sets: sets,
       localTeamDetails: localTeamDetails,
       visitantTeamDetails: visitantTeamDetails,
-      date: DateTime.now(),
+      createDate: DateTime.now(),
+      modifiedDate: DateTime.now(),
     );
 
     try {
@@ -82,20 +97,20 @@ class VolleyballMatchesVm with ChangeNotifier {
             .add(match.toJson());
         _matchId = docRef.id;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Partido creado con éxito!")),
+          SnackBar(content: Text('Partido creado con éxito!')),
         );
       } else {
         await FirebaseFirestore.instance
-            .collection("volleyball_matches")
+            .collection('volleyball_matches')
             .doc(_matchId)
             .update(match.toJson());
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Partido actualizado con éxito!")),
+          SnackBar(content: Text('Partido actualizado con éxito!')),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error saving data: $e")),
+        SnackBar(content: Text('Error saving data: $e')),
       );
     }
   }

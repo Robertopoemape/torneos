@@ -210,16 +210,59 @@ class TournamentDetailRouteArgs {
 
 /// generated route for
 /// [_i9.VolleyballMatchesScreen]
-class VolleyballMatchesRoute extends _i10.PageRouteInfo<void> {
-  const VolleyballMatchesRoute({List<_i10.PageRouteInfo>? children})
-    : super(VolleyballMatchesRoute.name, initialChildren: children);
+class VolleyballMatchesRoute
+    extends _i10.PageRouteInfo<VolleyballMatchesRouteArgs> {
+  VolleyballMatchesRoute({
+    required String tournamentId,
+    required String localTeam,
+    required String visitantTeam,
+    _i11.Key? key,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
+         VolleyballMatchesRoute.name,
+         args: VolleyballMatchesRouteArgs(
+           tournamentId: tournamentId,
+           localTeam: localTeam,
+           visitantTeam: visitantTeam,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'VolleyballMatchesRoute';
 
   static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i9.VolleyballMatchesScreen();
+      final args = data.argsAs<VolleyballMatchesRouteArgs>();
+      return _i9.VolleyballMatchesScreen(
+        tournamentId: args.tournamentId,
+        localTeam: args.localTeam,
+        visitantTeam: args.visitantTeam,
+        key: args.key,
+      );
     },
   );
+}
+
+class VolleyballMatchesRouteArgs {
+  const VolleyballMatchesRouteArgs({
+    required this.tournamentId,
+    required this.localTeam,
+    required this.visitantTeam,
+    this.key,
+  });
+
+  final String tournamentId;
+
+  final String localTeam;
+
+  final String visitantTeam;
+
+  final _i11.Key? key;
+
+  @override
+  String toString() {
+    return 'VolleyballMatchesRouteArgs{tournamentId: $tournamentId, localTeam: $localTeam, visitantTeam: $visitantTeam, key: $key}';
+  }
 }

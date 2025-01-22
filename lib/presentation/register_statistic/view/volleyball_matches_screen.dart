@@ -9,15 +9,24 @@ import '../register_statistic.dart';
 
 @RoutePage()
 class VolleyballMatchesScreen extends StatelessWidget {
-  const VolleyballMatchesScreen({super.key});
+  const VolleyballMatchesScreen({
+    required this.tournamentId,
+    required this.localTeam,
+    required this.visitantTeam,
+    super.key,
+  });
 
+  final String tournamentId;
+  final String localTeam;
+  final String visitantTeam;
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => VolleyballMatchesController()),
         ChangeNotifierProvider(
-            create: (context) => VolleyballMatchesVm(context.read())),
+            create: (context) => VolleyballMatchesVm(
+                context.read(), tournamentId, localTeam, visitantTeam)),
       ],
       child: Consumer<VolleyballMatchesVm>(builder: (context, viewModel, _) {
         final controller = context.read<VolleyballMatchesController>();
@@ -39,15 +48,15 @@ class VolleyballMatchesScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ComDropdown(
+                    ComInputText(
                       controller: controller.localTeamController,
-                      items: ['equipo1'],
-                      hintText: 'Nombre del Equipo',
+                      labelText: 'Equipo local',
+                      readOnly: true,
                     ),
-                    ComDropdown(
+                    ComInputText(
                       controller: controller.visitantTeamController,
-                      items: ['equipo2'],
-                      hintText: 'Nombre del Entrenador',
+                      labelText: 'Equipo visitante',
+                      readOnly: true,
                     ),
                     gap16,
                     Wrap(
@@ -92,6 +101,7 @@ class VolleyballMatchesScreen extends StatelessWidget {
                                       controller: controller
                                           .team2PointsControllers[index],
                                       labelText: 'Visitante',
+                                      readOnly: false,
                                       onChangedText: (value) {
                                         if (viewModel.sets.length <= index) {
                                           viewModel.sets.add(SetScore(

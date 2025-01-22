@@ -11,6 +11,7 @@ class ComInputText extends StatefulWidget {
     this.borderRadius = ds8,
     this.borderColor,
     this.keyboardType = TextInputType.number,
+    this.readOnly = false,
     this.paddingContent = const EdgeInsets.symmetric(vertical: ds8),
     super.key,
   });
@@ -22,6 +23,7 @@ class ComInputText extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final Function(String)? onChangedText;
+  final bool readOnly;
   final EdgeInsets paddingContent;
 
   @override
@@ -94,6 +96,7 @@ class _ComInputTextState extends State<ComInputText> {
             vertical: 8,
           ),
         ),
+        readOnly: widget.readOnly,
         keyboardType: widget.keyboardType,
         onChanged: (value) {
           //   if (!widget.isOptionalField) {

@@ -48,17 +48,15 @@ class TournamentScreenContent extends StatelessWidget {
           children: [
             Text(
               viewModel.tournamentData.description,
-              style: const TextStyle(fontSize: 16),
+              style: ComTextStyle.button2,
             ),
             gap16,
             Row(
               children: [
                 const Icon(Icons.calendar_today, size: ds20),
                 space8,
-                Text(
-                  'Fecha de inicio: ${viewModel.tournamentData.startDate}',
-                  style: const TextStyle(fontSize: 16),
-                ),
+                Text('Fecha de inicio: ${viewModel.tournamentData.startDate}',
+                    style: ComTextStyle.body1.w400),
               ],
             ),
             gap8,
@@ -67,9 +65,8 @@ class TournamentScreenContent extends StatelessWidget {
                 const Icon(Icons.calendar_today, size: 20),
                 space8,
                 Text(
-                  "Fecha de finalización: ${viewModel.tournamentData.endDate}",
-                  style: const TextStyle(fontSize: 16),
-                ),
+                    'Fecha de finalización: ${viewModel.tournamentData.endDate}',
+                    style: ComTextStyle.body1.w400),
               ],
             ),
             gap8,
@@ -77,17 +74,12 @@ class TournamentScreenContent extends StatelessWidget {
               children: [
                 const Icon(Icons.location_on, size: 20),
                 space8,
-                Text(
-                  "Lugar: ${viewModel.tournamentData.location}",
-                  style: const TextStyle(fontSize: 16),
-                ),
+                Text('Lugar: ${viewModel.tournamentData.location}',
+                    style: ComTextStyle.body1.w400),
               ],
             ),
             gap24,
-            const Text(
-              'Partidos:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            Text('Partidos:', style: ComTextStyle.h6),
             gap8,
             Expanded(
               child: ListView.builder(
@@ -98,13 +90,19 @@ class TournamentScreenContent extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: ListTile(
                       title:
-                          Text("${match.teamLocal} vs ${match.teamVisitante}"),
+                          Text('${match.teamLocal} vs ${match.teamVisitante}'),
                       subtitle: Text(
-                        "Fecha: ${match.date} | Hora: ${match.hour}",
+                        'Fecha: ${match.date} | Hora: ${match.hour}',
                       ),
                       trailing: const Icon(Icons.arrow_forward),
                       onTap: () {
-                        autoRouterPush(context, VolleyballMatchesRoute());
+                        autoRouterPush(
+                          context,
+                          VolleyballMatchesRoute(
+                              tournamentId: match.tournamentId,
+                              localTeam: match.teamLocal,
+                              visitantTeam: match.teamVisitante),
+                        );
                       },
                     ),
                   );
