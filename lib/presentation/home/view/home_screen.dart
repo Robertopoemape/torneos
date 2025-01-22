@@ -49,16 +49,16 @@ class HomeScreenContent extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(ds16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: CardTournament(
                 tournaments: viewModel.tournaments,
-                onPressed: (index) {
-                  autoRouterPush(
-                      context, TournamentDetailRoute(tournamentId: index));
+                onPressed: (tournament) {
+                  autoRouterPush(context,
+                      TournamentDetailRoute(tournamentData: tournament));
                 },
               ),
             ),

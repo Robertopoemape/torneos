@@ -1,34 +1,34 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../src/src.dart';
 
 class HomeVm with ChangeNotifier {
-  final List<TournamentData> tournaments = [
-    TournamentData(
-      tournamentId: '1',
-      nameTournament: 'Torneo Nacional de Voleibol',
-      imageUrl:
-          'https://st4.depositphotos.com/20523700/25950/i/450/depositphotos_259506188-stock-photo-illustration-picture-icon.jpg',
-      description: 'El torneo más importante del país.',
-      startDate: '2023-10-01',
-      endDate: '2023-10-10',
-      location: 'Ciudad Capital',
-      stadium: 'Estadio Nacional',
-      createDate: DateTime.now(),
-      modifiedDate: DateTime.now(),
-    ),
-    TournamentData(
-      tournamentId: '2',
-      nameTournament: 'Torneo Nacional ',
-      imageUrl:
-          'https://st4.depositphotos.com/20523700/25950/i/450/depositphotos_259506188-stock-photo-illustration-picture-icon.jpg',
-      description: 'El torneo más importante del país.',
-      startDate: '2023-10-01',
-      endDate: '2023-10-10',
-      location: 'Lima',
-      stadium: 'Estadio Nacional2',
-      createDate: DateTime.now(),
-      modifiedDate: DateTime.now(),
-    ),
-  ];
+  HomeVm() {
+    initState();
+  }
+  initState() async {
+    await loadTournamentData();
+  }
+
+  List<TournamentData> tournaments = [];
+  Future<void> loadTournamentData() async {
+    try {
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('tournaments').get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        tournaments = querySnapshot.docs.map((doc) {
+          return TournamentData.fromJson(doc.data() as Map<String, dynamic>);
+        }).toList();
+        notifyListeners();
+      } else {
+        log("No se encontraron torneos.");
+      }
+    } catch (e) {
+      log("Error al cargar los torneos: $e");
+    }
+  }
 }

@@ -4,20 +4,21 @@ import 'package:provider/provider.dart';
 
 import '../../../core/core.dart';
 
+import '../../../src/models/models.dart';
 import 'tournament_detail_vm.dart';
 
 @RoutePage()
 class TournamentDetailScreen extends StatelessWidget {
   const TournamentDetailScreen({
+    required this.tournamentData,
     super.key,
-    required this.tournamentId,
   });
-  final String tournamentId;
+  final TournamentData tournamentData;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => TournamentDetailVm(tournamentId),
+      create: (_) => TournamentDetailVm(tournamentData),
       child: const TournamentScreenContent(),
     );
   }
@@ -33,7 +34,7 @@ class TournamentScreenContent extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          viewModel.tournament.nameTournament,
+          viewModel.tournamentData.nameTournament,
           style: ComTextStyle.h6.gsWhite,
         ),
         backgroundColor: ComColors.succ500,
@@ -46,7 +47,7 @@ class TournamentScreenContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              viewModel.tournament.description,
+              viewModel.tournamentData.description,
               style: const TextStyle(fontSize: 16),
             ),
             gap16,
@@ -55,7 +56,7 @@ class TournamentScreenContent extends StatelessWidget {
                 const Icon(Icons.calendar_today, size: ds20),
                 space8,
                 Text(
-                  'Fecha de inicio: ${viewModel.tournament.startDate}',
+                  'Fecha de inicio: ${viewModel.tournamentData.startDate}',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
@@ -66,7 +67,7 @@ class TournamentScreenContent extends StatelessWidget {
                 const Icon(Icons.calendar_today, size: 20),
                 space8,
                 Text(
-                  "Fecha de finalización: ${viewModel.tournament.endDate}",
+                  "Fecha de finalización: ${viewModel.tournamentData.endDate}",
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
@@ -77,22 +78,22 @@ class TournamentScreenContent extends StatelessWidget {
                 const Icon(Icons.location_on, size: 20),
                 space8,
                 Text(
-                  "Lugar: ${viewModel.tournament.location}",
+                  "Lugar: ${viewModel.tournamentData.location}",
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
             ),
             gap24,
             const Text(
-              "Partidos:",
+              'Partidos:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             gap8,
             Expanded(
               child: ListView.builder(
-                itemCount: viewModel.tournament.matches.length,
+                itemCount: viewModel.matchesData.length,
                 itemBuilder: (context, index) {
-                  final match = viewModel.tournament.matches[index];
+                  final match = viewModel.matchesData[index];
                   return Card(
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: ListTile(

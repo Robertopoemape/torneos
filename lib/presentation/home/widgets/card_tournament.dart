@@ -9,7 +9,7 @@ class CardTournament extends StatelessWidget {
     required this.tournaments,
     super.key,
   });
-  final Function(String) onPressed;
+  final Function(TournamentData) onPressed;
   final List<TournamentData> tournaments;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CardTournament extends StatelessWidget {
       itemBuilder: (context, index) {
         final tournament = tournaments[index];
         return InkWell(
-          onTap: () => onPressed(tournament.tournamentId),
+          onTap: () => onPressed(tournament),
           child: Column(
             children: [
               ClipRRect(
