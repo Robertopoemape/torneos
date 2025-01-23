@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../src/models/models.dart';
-import '../controller/volleyball_matches_controller.dart';
+import '../controller/register_sets_vball_controller.dart';
 
-class VolleyballMatchesVm with ChangeNotifier {
-  VolleyballMatchesVm(
+class RegisterVoleySetsVm with ChangeNotifier {
+  RegisterVoleySetsVm(
     this._controller,
     this.tournamentId,
     this.localTeam,

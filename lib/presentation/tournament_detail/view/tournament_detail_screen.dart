@@ -98,7 +98,7 @@ class TournamentScreenContent extends StatelessWidget {
                       onTap: () {
                         autoRouterPush(
                           context,
-                          VolleyballMatchesRoute(
+                          RegisterSetsVballRoute(
                               tournamentId: match.tournamentId,
                               localTeam: match.teamLocal,
                               visitantTeam: match.teamVisitante),

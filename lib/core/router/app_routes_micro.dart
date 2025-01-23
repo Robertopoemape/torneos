@@ -13,10 +13,10 @@ class MicroAppRouter extends RootStackRouter {
           page: HomeRoute.page,
           initial: true,
         ),
-        AutoRoute(page: VolleyballMatchesRoute.page),
+        AutoRoute(page: RegisterSetsVballRoute.page),
         AutoRoute(page: TablePointsVoleyRoute.page),
         AutoRoute(page: TableResultVoleyRoute.page),
-        AutoRoute(page: RegisterTeamRoute.page),
+        AutoRoute(page: RegisterTeamVballRoute.page),
         AutoRoute(page: TournamentDetailRoute.page),
         AutoRoute(page: RegisterTournamentRoute.page),
       ];

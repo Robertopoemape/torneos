@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../src/models/player_data.dart';
-import '../controller/register_team_controller.dart';
+import '../controller/register_team_vball_controller.dart';
 
 class RegisterTeamVm with ChangeNotifier {
   final RegisterTeamController _controller;

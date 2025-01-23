@@ -4,13 +4,13 @@ import 'package:provider/provider.dart';
 
 import '../../../components/components.dart';
 import '../../../core/core.dart';
-import '../controller/register_team_controller.dart';
+import '../controller/register_team_vball_controller.dart';
 import '../widgets/show_selection_dialog.dart';
-import 'register_team_vm.dart';
+import 'register_team_vball_vm.dart';
 
 @RoutePage()
-class RegisterTeamScreen extends StatelessWidget {
-  const RegisterTeamScreen({super.key});
+class RegisterTeamVballScreen extends StatelessWidget {
+  const RegisterTeamVballScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

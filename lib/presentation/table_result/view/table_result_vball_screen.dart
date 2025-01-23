@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../core/style/style.dart';
 import '../widgets/my_data_source.dart';
-import 'table_result_voley_vm.dart';
+import 'table_result_vball_vm.dart';
 
 @RoutePage()
 class TableResultVoleyScreen extends StatelessWidget {

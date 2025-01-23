@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import '../../../components/components.dart';
 import '../../../core/core.dart';
 import '../../../src/models/models.dart';
-import '../register_statistic.dart';
+import '../register_points.dart';
 
 @RoutePage()
-class VolleyballMatchesScreen extends StatelessWidget {
-  const VolleyballMatchesScreen({
+class RegisterSetsVballScreen extends StatelessWidget {
+  const RegisterSetsVballScreen({
     required this.tournamentId,
     required this.localTeam,
     required this.visitantTeam,
@@ -25,10 +25,10 @@ class VolleyballMatchesScreen extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => VolleyballMatchesController()),
         ChangeNotifierProvider(
-            create: (context) => VolleyballMatchesVm(
+            create: (context) => RegisterVoleySetsVm(
                 context.read(), tournamentId, localTeam, visitantTeam)),
       ],
-      child: Consumer<VolleyballMatchesVm>(builder: (context, viewModel, _) {
+      child: Consumer<RegisterVoleySetsVm>(builder: (context, viewModel, _) {
         final controller = context.read<VolleyballMatchesController>();
         return Scaffold(
           appBar: AppBar(

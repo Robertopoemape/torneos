@@ -40,7 +40,7 @@ class ExpansionTitleConfig extends StatelessWidget {
           ItemExpansionTitle(
             name: 'Registro de equipos',
             onTap: () {
-              autoRouterPush(context, RegisterTeamRoute());
+              autoRouterPush(context, RegisterTeamVballRoute());
             },
           ),
           ItemExpansionTitle(name: 'Fixture'),
