@@ -1,4 +1,4 @@
-import '../src.dart';
+import 'models.dart';
 
 class MatchData {
   final String teamName;
@@ -7,15 +7,15 @@ class MatchData {
 
   MatchData({
     required this.teamName,
-    this.position,
     required this.stats,
+    this.position,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'teamName': teamName,
       'position': position,
-      'stats': stats.toMap(),
+      'stats': stats.toJson(),
     };
   }
 

@@ -36,7 +36,7 @@ class VolleyballMatchesScreen extends StatelessWidget {
             foregroundColor: ComColors.gsWhite,
             centerTitle: true,
             title: Text(
-              'Registro de puntos volleyball',
+              'Registro de puntos voleybol',
               style: ComTextStyle.h6.gsWhite,
             ),
           ),

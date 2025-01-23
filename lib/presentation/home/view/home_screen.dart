@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/core.dart';
+import '../../../src/models/models.dart';
 import '../../drawer_menu_header/drawer_menu_header.dart';
 import '../home.dart';
 
@@ -38,13 +39,27 @@ class HomeScreenContent extends StatelessWidget {
         ),
         actions: [
           CustomPopupMenu(
-            onOptionSelected: (value) {
-              if (value == 1) {
-                //    autoRouterPush(context, VolleyballMatchesRoute());
-              } else if (value == 2) {
-                autoRouterPush(context, ResultTableRoute());
-              }
-            },
+            options: [
+              MenuItems(
+                title: 'Registro de puntos',
+                icon: Icons.add,
+                onOptionSelected: () {},
+              ),
+              MenuItems(
+                title: 'Tabla de puntos',
+                icon: Icons.bar_chart,
+                onOptionSelected: () {
+                  autoRouterPush(context, TablePointsVoleyRoute());
+                },
+              ),
+              MenuItems(
+                title: 'Tabla de Resultados',
+                icon: Icons.show_chart,
+                onOptionSelected: () {
+                  autoRouterPush(context, TableResultVoleyRoute());
+                },
+              ),
+            ],
           ),
         ],
       ),

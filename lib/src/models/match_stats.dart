@@ -33,7 +33,7 @@ class MatchStats {
     required this.zeroTwo,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'played': played,
       'won': won,

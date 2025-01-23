@@ -7,8 +7,8 @@ import '../../../core/style/app_text_style.dart';
 import '../../../src/src.dart';
 
 @RoutePage()
-class ResultTableScreen extends StatelessWidget {
-  const ResultTableScreen({super.key});
+class TablePointsVoleyScreen extends StatelessWidget {
+  const TablePointsVoleyScreen({super.key});
 
   Future<List<MatchData>> fetchMatchData() async {
     final snapshot =
@@ -27,7 +27,7 @@ class ResultTableScreen extends StatelessWidget {
         backgroundColor: ComColors.succ500,
         foregroundColor: ComColors.gsWhite,
         title: Text(
-          'Tabla de Resultados',
+          'Tabla de Puntos',
           style: ComTextStyle.h6.gsWhite,
         ),
       ),

@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
 
-class CustomPopupMenu extends StatelessWidget {
-  final void Function(int) onOptionSelected;
+import '../../../src/models/models.dart';
 
-  const CustomPopupMenu({super.key, required this.onOptionSelected});
+class CustomPopupMenu extends StatelessWidget {
+  const CustomPopupMenu({
+    required this.options,
+    super.key,
+  });
+  final List<MenuItems> options;
 
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<int>(
-      onSelected: onOptionSelected,
-      itemBuilder: (BuildContext context) => [
-        PopupMenuItem(
-          value: 1,
+      onSelected: (index) => options[index].onOptionSelected(),
+      itemBuilder: (context) => options.asMap().entries.map((entry) {
+        final index = entry.key;
+        final item = entry.value;
+        return PopupMenuItem<int>(
+          value: index,
           child: Row(
-            children: const [
-              Icon(Icons.add, color: Colors.black),
-              SizedBox(width: 8),
-              Text('Registro de puntaje'),
+            children: [
+              Icon(item.icon, color: Colors.black),
+              const SizedBox(width: 8),
+              Text(item.title, style: const TextStyle(fontSize: 16)),
             ],
           ),
-        ),
-        PopupMenuItem(
-          value: 2,
-          child: Row(
-            children: const [
-              Icon(Icons.bar_chart, color: Colors.black),
-              SizedBox(width: 8),
-              Text('Tabla de puntaje'),
-            ],
-          ),
-        ),
-      ],
+        );
+      }).toList(),
     );
   }
 }
