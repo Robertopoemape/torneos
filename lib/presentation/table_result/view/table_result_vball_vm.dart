@@ -34,7 +34,7 @@ class TableResultVoleyVm extends ChangeNotifier {
   List<GridColumn> get gridColumns {
     const columnHeaders = [
       {'name': 'Fecha', 'width': 80.0},
-      {'name': 'Equipo', 'width': 150.0},
+      {'name': 'Equipo', 'width': 197.0},
       {'name': 'S1', 'width': 40.0},
       {'name': 'S2', 'width': 40.0},
       {'name': 'S3', 'width': 40.0},
@@ -68,9 +68,8 @@ class TableResultVoleyVm extends ChangeNotifier {
       _error = null;
       notifyListeners();
 
-      final snapshot = await FirebaseFirestore.instance
-          .collection('volleyball_matches')
-          .get();
+      final snapshot =
+          await FirebaseFirestore.instance.collection('volleyball_sets').get();
       _matches = snapshot.docs.map((doc) {
         return VolleyballMatch.fromJson(
           doc.data(),

@@ -19,147 +19,143 @@ class RegisterSetsVballScreen extends StatelessWidget {
   final String tournamentId;
   final String localTeam;
   final String visitantTeam;
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => VolleyballMatchesController()),
         ChangeNotifierProvider(
-            create: (context) => RegisterVoleySetsVm(
-                context.read(), tournamentId, localTeam, visitantTeam)),
-      ],
-      child: Consumer<RegisterVoleySetsVm>(builder: (context, viewModel, _) {
-        final controller = context.read<VolleyballMatchesController>();
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: ComColors.succ500,
-            foregroundColor: ComColors.gsWhite,
-            centerTitle: true,
-            title: Text(
-              'Registro de puntos voleybol',
-              style: ComTextStyle.h6.gsWhite,
-            ),
+          create: (context) => RegisterVoleySetsVm(
+            context.read(),
+            tournamentId,
+            localTeam,
+            visitantTeam,
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(ds16),
-              child: Form(
-                key: controller.formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ComInputText(
-                      controller: controller.localTeamController,
-                      labelText: 'Equipo local',
-                      readOnly: true,
-                    ),
-                    ComInputText(
-                      controller: controller.visitantTeamController,
-                      labelText: 'Equipo visitante',
-                      readOnly: true,
-                    ),
-                    gap16,
-                    Wrap(
-                      children: List.generate(viewModel.currentSets, (index) {
-                        viewModel.addControllersForSet(index);
-                        return Padding(
-                          padding: const EdgeInsets.only(right: ds8),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: ds8),
-                                child: Text(
-                                  "${index + 1} Set",
-                                ),
-                              ),
-                              Wrap(
-                                alignment: WrapAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 80,
-                                    child: ComInputText(
-                                      controller: controller
-                                          .team1PointsControllers[index],
-                                      labelText: 'Local',
-                                      onChangedText: (value) {
-                                        if (viewModel.sets.length <= index) {
-                                          viewModel.sets.add(SetScore(
-                                              localteam: 0, visitantTeam: 0));
-                                        }
-                                        viewModel.sets[index] =
-                                            viewModel.sets[index].copyWith(
-                                          localteam: int.tryParse(value) ?? 0,
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  space8,
-                                  SizedBox(
-                                    width: 80,
-                                    child: ComInputText(
-                                      controller: controller
-                                          .team2PointsControllers[index],
-                                      labelText: 'Visitante',
-                                      readOnly: false,
-                                      onChangedText: (value) {
-                                        if (viewModel.sets.length <= index) {
-                                          viewModel.sets.add(SetScore(
-                                              localteam: 0, visitantTeam: 0));
-                                        }
-                                        viewModel.sets[index] =
-                                            viewModel.sets[index].copyWith(
-                                          visitantTeam:
-                                              int.tryParse(value) ?? 0,
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
-                    ),
-                    gap16,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (viewModel.currentSets < viewModel.maxSets)
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (controller.formKey.currentState!
-                                    .validate()) {
-                                  controller.formKey.currentState!.save();
-                                  viewModel.currentSets++;
-                                }
+        ),
+      ],
+      child: Consumer<RegisterVoleySetsVm>(
+        builder: (context, viewModel, _) {
+          final controller = context.read<VolleyballMatchesController>();
+          return Scaffold(
+            appBar: _buildAppBar(),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(ds16),
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildTeamInputs(controller),
+                      gap16,
+                      SizedBox(
+                        width: double.infinity,
+                        child: Wrap(
+                          alignment: WrapAlignment.spaceAround,
+                          children:
+                              List.generate(viewModel.currentSets, (index) {
+                            viewModel.addControllersForSet(index);
+                            return SetInputRow(
+                              index: index,
+                              localController:
+                                  controller.team1PointsControllers[index],
+                              visitantController:
+                                  controller.team2PointsControllers[index],
+                              onLocalScoreChanged: (value) {
+                                _updateSetScore(
+                                  viewModel,
+                                  index,
+                                  localScore: value,
+                                );
                               },
-                              child: Text('Siguiente set'),
-                            ),
-                          ),
-                        space16,
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (controller.formKey.currentState!.validate()) {
-                                controller.formKey.currentState!.save();
-                                viewModel.saveMatch(context);
-                              }
-                            },
-                            child: Text('Guardar'),
-                          ),
+                              onVisitantScoreChanged: (value) {
+                                _updateSetScore(
+                                  viewModel,
+                                  index,
+                                  visitantScore: value,
+                                );
+                              },
+                            );
+                          }),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      gap16,
+                      ActionButtons(
+                        canAddSet: viewModel.currentSets < viewModel.maxSets,
+                        onAddSet: () {
+                          if (_validateAndSaveForm(controller)) {
+                            viewModel.currentSets++;
+                          }
+                        },
+                        onSave: () {
+                          if (_validateAndSaveForm(controller)) {
+                            viewModel.saveMatch(context);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: ComColors.succ500,
+      foregroundColor: ComColors.gsWhite,
+      centerTitle: true,
+      title: Text(
+        'Registro de sets',
+        style: ComTextStyle.h6.gsWhite,
+      ),
+    );
+  }
+
+  Widget _buildTeamInputs(VolleyballMatchesController controller) {
+    return Column(
+      children: [
+        ComInputText(
+          controller: controller.localTeamController,
+          labelText: 'Equipo local',
+          readOnly: true,
+        ),
+        ComInputText(
+          controller: controller.visitantTeamController,
+          labelText: 'Equipo visitante',
+          readOnly: true,
+        ),
+      ],
+    );
+  }
+
+  bool _validateAndSaveForm(VolleyballMatchesController controller) {
+    final form = controller.formKey.currentState;
+    if (form != null && form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  void _updateSetScore(
+    RegisterVoleySetsVm viewModel,
+    int index, {
+    String? localScore,
+    String? visitantScore,
+  }) {
+    if (viewModel.sets.length <= index) {
+      viewModel.sets.add(SetScore(localteam: 0, visitantTeam: 0));
+    }
+    viewModel.sets[index] = viewModel.sets[index].copyWith(
+      localteam: localScore != null ? int.tryParse(localScore) ?? 0 : null,
+      visitantTeam:
+          visitantScore != null ? int.tryParse(visitantScore) ?? 0 : null,
     );
   }
 }

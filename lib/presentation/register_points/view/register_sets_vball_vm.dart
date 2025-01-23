@@ -93,7 +93,7 @@ class RegisterVoleySetsVm with ChangeNotifier {
     try {
       if (_matchId == null) {
         final docRef = await FirebaseFirestore.instance
-            .collection('volleyball_matches')
+            .collection('volleyball_sets')
             .add(match.toJson());
         _matchId = docRef.id;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -101,7 +101,7 @@ class RegisterVoleySetsVm with ChangeNotifier {
         );
       } else {
         await FirebaseFirestore.instance
-            .collection('volleyball_matches')
+            .collection('volleyball_sets')
             .doc(_matchId)
             .update(match.toJson());
         ScaffoldMessenger.of(context).showSnackBar(

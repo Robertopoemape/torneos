@@ -72,13 +72,19 @@ class TableResultVoleyScreen extends StatelessWidget {
   }
 
   Widget _buildDataGrid(TableResultVoleyVm vm) {
-    return SfDataGrid(
-      source: MyDataSource(vm.rowData),
-      columnWidthMode: ColumnWidthMode.auto,
-      frozenColumnsCount: 2,
-      gridLinesVisibility: GridLinesVisibility.both,
-      headerGridLinesVisibility: GridLinesVisibility.both,
-      columns: vm.gridColumns,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SfDataGrid(
+          source: MyDataSource(vm.rowData),
+          columnWidthMode: constraints.maxWidth > 600
+              ? ColumnWidthMode.fill
+              : ColumnWidthMode.auto,
+          frozenColumnsCount: 2,
+          gridLinesVisibility: GridLinesVisibility.both,
+          headerGridLinesVisibility: GridLinesVisibility.both,
+          columns: vm.gridColumns,
+        );
+      },
     );
   }
 }
