@@ -121,9 +121,7 @@ class _ImageSvgState extends State<ImageSvg> {
             width: widget.width,
             fit: widget.fit ?? BoxFit.contain,
             colorFilter: ColorFilter.mode(
-                widget.color ?? ComColors.sec800,
-                BlendMode
-                    .srcIn), // widget.color != ComColors.sec500 ? widget.color : null,
+                widget.color ?? ComColors.sec800, BlendMode.srcIn),
             widget.pathNetwork,
             placeholderBuilder: (BuildContext context) => _crearSkeleton(),
           ),

@@ -92,7 +92,7 @@ class TournamentScreenContent extends StatelessWidget {
                       title:
                           Text('${match.teamLocal} vs ${match.teamVisitante}'),
                       subtitle: Text(
-                        'Fecha: ${match.date} | Hora: ${match.hour}',
+                        'Fecha: ${match.dateStart} | Hora: ${match.hour}',
                       ),
                       trailing: const Icon(Icons.arrow_forward),
                       onTap: () {

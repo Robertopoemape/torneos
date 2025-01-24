@@ -37,9 +37,8 @@ class RegisterTournamentVm extends ChangeNotifier {
 
       for (var match in matches) {
         final matchData = MatchesData(
-          matchesId: match.matchesId,
           tournamentId: tournamentId,
-          date: match.date,
+          dateStart: match.dateStart,
           hour: match.hour,
           teamLocal: match.teamLocal,
           teamVisitante: match.teamVisitante,
@@ -64,9 +63,8 @@ class RegisterTournamentVm extends ChangeNotifier {
 
   void addMatch() {
     final match = MatchesData(
-      matchesId: 'match${matches.length + 1}',
       tournamentId: '',
-      date: _controller.matchDateController.text,
+      dateStart: _controller.matchDateController.text,
       hour: _controller.matchHourController.text,
       teamLocal: _controller.teamLocalController.text,
       teamVisitante: _controller.teamVisitanteController.text,

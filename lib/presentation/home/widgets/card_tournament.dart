@@ -27,11 +27,13 @@ class CardTournament extends StatelessWidget {
           onTap: () => onPressed(tournament),
           child: Column(
             children: [
-              ImageSvg(
-                pathNetwork: tournament.imageUrl,
+              SizedBox(
                 height: 160,
-                fit: BoxFit.cover,
-                width: double.infinity,
+                child: ImageSvg(
+                  pathNetwork: tournament.imageUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
               ),
               gap4,
               Expanded(

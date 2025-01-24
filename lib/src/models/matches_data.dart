@@ -1,15 +1,13 @@
 class MatchesData {
-  final String matchesId;
   final String tournamentId;
-  final String date;
+  final String dateStart;
   final String hour;
   final String teamLocal;
   final String teamVisitante;
 
   MatchesData({
-    required this.matchesId,
     required this.tournamentId,
-    required this.date,
+    required this.dateStart,
     required this.hour,
     required this.teamLocal,
     required this.teamVisitante,
@@ -17,9 +15,8 @@ class MatchesData {
 
   factory MatchesData.fromJson(Map<String, dynamic> json) {
     return MatchesData(
-      matchesId: json['matchesId'],
       tournamentId: json['tournamentId'],
-      date: json['date'],
+      dateStart: json['dateStart'],
       hour: json['hour'],
       teamLocal: json['teamLocal'],
       teamVisitante: json['teamVisitante'],
@@ -27,9 +24,8 @@ class MatchesData {
   }
   Map<String, dynamic> toJson() {
     return {
-      'matchesId': matchesId,
       'tournamentId': tournamentId,
-      'date': date,
+      'dateStart': dateStart,
       'hour': hour,
       'teamLocal': teamLocal,
       'teamVisitante': teamVisitante,

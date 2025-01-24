@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -10,13 +7,14 @@ class DrawerMenuHeaderVm with ChangeNotifier {
   }
 
   initState() async {
-    await fetchPlayerData('1');
-    await loadPlayerData();
+    // await fetchPlayerData('1');
+    // await loadPlayerData();
   }
 
   String playerName = '';
   String? playerPhotoUrl = '';
 
+/*
   Future<void> loadPlayerData() async {
     try {
       if (playerPhotoUrl != null && playerPhotoUrl!.isNotEmpty) {
@@ -36,8 +34,9 @@ class DrawerMenuHeaderVm with ChangeNotifier {
     } catch (e) {
       log("Error al cargar los datos del jugador: $e");
     }
-  }
+  }*/
 
+/*
   Future<void> fetchPlayerData(String documentId) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
@@ -61,5 +60,5 @@ class DrawerMenuHeaderVm with ChangeNotifier {
     } catch (e) {
       debugPrint("Error inesperado: $e");
     }
-  }
+  }*/
 }

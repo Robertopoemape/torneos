@@ -123,7 +123,8 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                             title: Text(
                                 '${match.teamLocal} vs ${match.teamVisitante}',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            subtitle: Text('${match.date} - ${match.hour}'),
+                            subtitle:
+                                Text('${match.dateStart} - ${match.hour}'),
                             trailing:
                                 Icon(Icons.delete, color: ComColors.err500),
                             onTap: () {
