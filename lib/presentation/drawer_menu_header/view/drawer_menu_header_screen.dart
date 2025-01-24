@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/core.dart';
+import '../../../src/models/models.dart';
 import '../widgets/widgets.dart';
 import 'drawer_menu_header_vm.dart';
 
@@ -23,11 +24,18 @@ class DrawerMenuHeaderScreen extends StatelessWidget {
             margin: EdgeInsets.zero,
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: DrawerOptions(
-              options: ['Inicio', 'Mi Perfil', 'Acerca de nosotros'],
+              options: [
+                MenuItems(
+                    onOptionSelected: () {
+                      autoRouterPop(context);
+                    },
+                    title: 'Inicio'),
+                MenuItems(onOptionSelected: () {}, title: 'Mi perfil'),
+                MenuItems(onOptionSelected: () {}, title: 'Acerca de nosotros'),
+              ],
               onLogout: () {},
               name: viewModel.playerName,
-              playerPhotoUrl: viewModel.playerPhotoUrl ??
-                  'https://example.com/default-avatar.png',
+              playerPhotoUrl: ComSvg.notImg.path,
             ),
           ),
         );

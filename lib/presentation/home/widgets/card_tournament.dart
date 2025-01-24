@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_torneos/core/core.dart';
 
+import '../../../components/components.dart';
 import '../../../src/models/models.dart';
 
 class CardTournament extends StatelessWidget {
@@ -26,16 +27,13 @@ class CardTournament extends StatelessWidget {
           onTap: () => onPressed(tournament),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(ds8),
-                child: Image.network(
-                  tournament.imageUrl,
-                  height: 150,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+              ImageSvg(
+                pathNetwork: tournament.imageUrl,
+                height: 160,
+                fit: BoxFit.cover,
+                width: double.infinity,
               ),
-              gap2,
+              gap4,
               Expanded(
                 child: Center(
                   child: Text(

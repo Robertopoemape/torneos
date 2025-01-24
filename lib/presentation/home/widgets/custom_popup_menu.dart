@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/core.dart';
 import '../../../src/models/models.dart';
 
 class CustomPopupMenu extends StatelessWidget {
@@ -21,7 +22,7 @@ class CustomPopupMenu extends StatelessWidget {
           child: Row(
             children: [
               Icon(item.icon, color: Colors.black),
-              const SizedBox(width: 8),
+              space8,
               Text(item.title, style: const TextStyle(fontSize: 16)),
             ],
           ),

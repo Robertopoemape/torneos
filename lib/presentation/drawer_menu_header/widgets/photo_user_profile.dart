@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
+import '../../../components/components.dart';
 import '../../../core/core.dart';
 
 class PhotoUserProfile extends StatelessWidget {
@@ -20,7 +19,7 @@ class PhotoUserProfile extends StatelessWidget {
         gap10,
         Row(
           children: [
-            SizedBox(width: 24),
+            space24,
             const Spacer(),
             Text(
               lblTitle,
@@ -29,30 +28,30 @@ class PhotoUserProfile extends StatelessWidget {
             ),
             const Spacer(),
             InkWell(
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () => autoRouterPop(context),
               child: Icon(
                 Icons.close,
-                color: Colors.white,
-                size: 20,
+                color: ComColors.gsWhite,
+                size: ds20,
               ),
             ),
           ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        gap10,
         Stack(
           children: [
             Center(
               child: CircleAvatar(
-                backgroundColor: ComColors.succ500,
-                radius: 120,
+                backgroundColor: ComColors.gs300,
+                radius: 115,
                 child: CircleAvatar(
-                  backgroundColor: ComColors.gs200,
+                  backgroundColor: ComColors.succ500,
                   radius: 110,
-                  child: CircleAvatar(
-                    backgroundImage: FileImage(File(playerPhotoUrl)),
-                    radius: 105,
+                  child: ImageSvg(
+                    pathNetwork: playerPhotoUrl,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

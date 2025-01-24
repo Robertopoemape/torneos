@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/core.dart';
+import '../../../src/models/models.dart';
 import 'expansion_title_config.dart';
 import 'photo_user_profile.dart';
 
@@ -11,7 +12,7 @@ class DrawerOptions extends StatelessWidget {
     required this.playerPhotoUrl,
     required this.name,
   });
-  final List<String> options;
+  final List<MenuItems> options;
   final VoidCallback onLogout;
   final String playerPhotoUrl;
   final String name;
@@ -34,16 +35,16 @@ class DrawerOptions extends StatelessWidget {
           (option) => Column(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: option.onOptionSelected,
                 borderRadius: BorderRadius.circular(8),
                 splashColor: ComColors.act300.withOpacity(0.2),
                 highlightColor: ComColors.gs200.withOpacity(0.2),
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: ds15, horizontal: ds8),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    option,
+                    option.title,
                     style: ComTextStyle.body1.gsWhite,
                   ),
                 ),
@@ -57,7 +58,6 @@ class DrawerOptions extends StatelessWidget {
           ),
         ),
         ExpansionTitleConfig(),
-        //  Spacer(),
         Divider(
           color: ComColors.gs500,
           height: 0,

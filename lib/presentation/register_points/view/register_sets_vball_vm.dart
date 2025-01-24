@@ -44,16 +44,27 @@ class RegisterVoleySetsVm with ChangeNotifier {
 
     int resultLocal = 0;
     int resultVisitant = 0;
-    int localTeamPoints = 0;
-    int visitantTeamPoints = 0;
+    int scoreLocal = 0;
+    int scoreVisitant = 0;
+    int pointLocal = 0;
+    int pointVisitant = 0;
+    int score = 0;
 
     for (var set in sets) {
-      localTeamPoints += set.localteam;
-      visitantTeamPoints += set.visitantTeam;
+      pointLocal += set.localteam;
+      pointVisitant += set.visitantTeam;
       if (set.localteam > set.visitantTeam) {
         resultLocal++;
       } else {
         resultVisitant++;
+      }
+
+      if (resultLocal > resultVisitant) {
+        score = _calculateScore(resultLocal, resultVisitant);
+        scoreLocal = score;
+      } else {
+        score = _calculateScore(resultVisitant, resultLocal);
+        scoreVisitant = score;
       }
     }
 
@@ -64,8 +75,8 @@ class RegisterVoleySetsVm with ChangeNotifier {
       s4: sets.length > 3 ? sets[3].localteam : 0,
       s5: sets.length > 4 ? sets[4].localteam : 0,
       result: resultLocal,
-      score: resultLocal,
-      point: localTeamPoints,
+      score: scoreLocal,
+      point: pointLocal,
     );
 
     final visitantTeamDetails = TeamDetails(
@@ -75,8 +86,8 @@ class RegisterVoleySetsVm with ChangeNotifier {
       s4: sets.length > 3 ? sets[3].visitantTeam : 0,
       s5: sets.length > 4 ? sets[4].visitantTeam : 0,
       result: resultVisitant,
-      score: resultVisitant,
-      point: visitantTeamPoints,
+      score: scoreVisitant,
+      point: pointVisitant,
     );
 
     final match = VolleyballMatch(
@@ -113,6 +124,19 @@ class RegisterVoleySetsVm with ChangeNotifier {
         SnackBar(content: Text('Error saving data: $e')),
       );
     }
+  }
+
+  int _calculateScore(int teamWin, int teamLoser) {
+    const scoreMap = {
+      '2-0': 3,
+      '2-1': 2,
+      '1-2': 1,
+      '0-2': 0,
+    };
+
+    final key = '$teamWin-$teamLoser';
+
+    return scoreMap[key] ?? 0;
   }
 
   void addControllersForSet(int index) {
