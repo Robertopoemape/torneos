@@ -19,35 +19,46 @@ class CardTournament extends StatelessWidget {
         crossAxisCount: ints2,
         crossAxisSpacing: ds16,
         mainAxisSpacing: ds16,
+        childAspectRatio: 0.95,
       ),
       itemCount: tournaments.length,
       itemBuilder: (context, index) {
         final tournament = tournaments[index];
-        return InkWell(
-          onTap: () => onPressed(tournament),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 160,
-                child: ImageSvg(
-                  pathNetwork: tournament.imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
+        return Material(
+          elevation: 5,
+          borderRadius: BorderRadius.circular(ds8),
+          child: InkWell(
+            onTap: () => onPressed(tournament),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(ds8),
+                color: ComColors.gs100,
               ),
-              gap4,
-              Expanded(
-                child: Center(
-                  child: Text(
-                    tournament.nameTournament,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: ComTextStyle.caption,
-                    textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 160,
+                    child: ImageSvg(
+                      pathNetwork: tournament.imageUrl,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
                   ),
-                ),
+                  gap4,
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        tournament.nameTournament,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: ComTextStyle.caption.w900,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },
