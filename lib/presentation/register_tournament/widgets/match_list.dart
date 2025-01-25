@@ -34,7 +34,7 @@ class _MatchListState extends State<MatchList> {
             MatchOptionHeader(
               dateStart: match.dateStart,
               hour: match.hour,
-              onTap: () => () => removeMatchAt(index),
+              onTap: () => removeMatchAt(index),
             ),
             MatchCard(
               teamLocal: match.teamLocal,

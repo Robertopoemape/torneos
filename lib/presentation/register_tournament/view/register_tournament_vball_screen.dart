@@ -118,8 +118,8 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                               height: ds25,
                               padding: EdgeInsets.symmetric(horizontal: ds10),
                               backgroundColor: null,
-                              labelColor: ComColors.inf800,
-                              borderColor: ComColors.inf800,
+                              labelColor: ComColors.inf600,
+                              borderColor: Colors.transparent,
                               isActivatedIcon: true,
                             ),
                             if (viewModel.matches.isNotEmpty) ...[

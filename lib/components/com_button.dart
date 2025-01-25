@@ -39,13 +39,14 @@ class ComButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          elevation: ds6,
           padding: padding,
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(ds8),
             side: BorderSide(
               color: borderColor,
-              width: ds2,
+              width: ds1,
             ),
           ),
         ),
