@@ -92,8 +92,8 @@ class _ComInputTextState extends State<ComInputText> {
             borderRadius: BorderRadius.circular(widget.borderRadius!),
           ),
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
+            horizontal: ds16,
+            vertical: ds8,
           ),
         ),
         readOnly: widget.readOnly,

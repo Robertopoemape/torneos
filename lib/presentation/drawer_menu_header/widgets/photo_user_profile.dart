@@ -47,7 +47,7 @@ class PhotoUserProfile extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: ComColors.succ500,
                   radius: 110,
-                  child: ImageSvg(
+                  child: ComImageSvg(
                     pathNetwork: playerPhotoUrl,
                     height: 150,
                     width: 150,

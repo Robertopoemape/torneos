@@ -15,8 +15,8 @@ enum ImgTypeData {
   imgLocalPNG,
 }
 
-class ImageSvg extends StatefulWidget {
-  const ImageSvg(
+class ComImageSvg extends StatefulWidget {
+  const ComImageSvg(
       {required this.pathNetwork,
       this.width,
       this.height,
@@ -36,10 +36,10 @@ class ImageSvg extends StatefulWidget {
   final bool isLocal;
 
   @override
-  State<ImageSvg> createState() => _ImageSvgState();
+  State<ComImageSvg> createState() => _ComImageSvgState();
 }
 
-class _ImageSvgState extends State<ImageSvg> {
+class _ComImageSvgState extends State<ComImageSvg> {
   ImgTypeData imgTypeData = ImgTypeData.imgLoading;
   String key = '';
   bool _errorEnCarga = false;

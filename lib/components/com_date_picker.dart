@@ -4,18 +4,60 @@ import 'package:intl/intl.dart';
 
 import '../core/core.dart';
 
-class BirthDatePicker extends StatefulWidget {
-  const BirthDatePicker({
+class ComDatePicker extends StatefulWidget {
+  const ComDatePicker._({
     required this.labelText,
+    required this.dateValidator,
     this.onDateSelected,
     this.initialDate,
     this.widthBorder = ds1,
     this.borderRadius = ds8,
     this.paddingContent = const EdgeInsets.symmetric(vertical: ds8),
     this.hintText = "DD/MM/YYYY",
-    super.key,
   });
+
+  factory ComDatePicker.forBirthDate({
+    required String labelText,
+    ValueChanged<DateTime?>? onDateSelected,
+    DateTime? initialDate,
+    double widthBorder = ds1,
+    double borderRadius = ds8,
+    EdgeInsets paddingContent = const EdgeInsets.symmetric(vertical: ds8),
+    String hintText = '',
+  }) {
+    return ComDatePicker._(
+      labelText: labelText,
+      dateValidator: DateValidator.validateBirhtDate,
+      onDateSelected: onDateSelected,
+      initialDate: initialDate,
+      widthBorder: widthBorder,
+      borderRadius: borderRadius,
+      paddingContent: paddingContent,
+      hintText: hintText,
+    );
+  }
+
+  factory ComDatePicker.dateSelection({
+    required String labelText,
+    ValueChanged<DateTime?>? onDateSelected,
+    DateTime? initialDate,
+    double widthBorder = ds1,
+    double borderRadius = ds8,
+    EdgeInsets paddingContent = const EdgeInsets.symmetric(vertical: ds8),
+  }) {
+    return ComDatePicker._(
+      labelText: labelText,
+      dateValidator: DateValidator.validateDateSelection,
+      onDateSelected: onDateSelected,
+      initialDate: initialDate,
+      widthBorder: widthBorder,
+      borderRadius: borderRadius,
+      paddingContent: paddingContent,
+    );
+  }
+
   final String labelText;
+  final Function(DateTime) dateValidator;
   final ValueChanged<DateTime?>? onDateSelected;
   final DateTime? initialDate;
   final String hintText;
@@ -24,10 +66,10 @@ class BirthDatePicker extends StatefulWidget {
   final EdgeInsets paddingContent;
 
   @override
-  State<BirthDatePicker> createState() => _BirthDatePickerState();
+  State<ComDatePicker> createState() => _ComDatePickerState();
 }
 
-class _BirthDatePickerState extends State<BirthDatePicker> {
+class _ComDatePickerState extends State<ComDatePicker> {
   Color? borderColor;
   late TextEditingController _dateController;
   final DateFormat _dateFormat = DateFormat('dd/MM/yyyy');
@@ -51,27 +93,16 @@ class _BirthDatePickerState extends State<BirthDatePicker> {
     super.dispose();
   }
 
-  bool _isAdult(DateTime date) {
-    final now = DateTime.now();
-    final age = now.year - date.year;
-    final isBirthdayPassed = now.month > date.month ||
-        (now.month == date.month && now.day >= date.day);
-    return age > 18 || (age == 18 && isBirthdayPassed);
-  }
-
   void _validateAndSetDate(String value) {
     try {
       final parsedDate = _dateFormat.parseStrict(value);
-      if (!_isAdult(parsedDate)) {
-        setState(() {
-          _errorMessage = "Debes ser mayor de edad.";
-          borderColor = ComColors.err500;
-        });
-      } else {
-        setState(() {
-          _errorMessage = null;
-          borderColor = ComColors.succ500;
-        });
+      final error = DateValidator.validateDateSelection(parsedDate);
+      setState(() {
+        _errorMessage = error;
+        borderColor = error == null ? ComColors.succ500 : ComColors.err500;
+      });
+
+      if (error == null) {
         widget.onDateSelected?.call(parsedDate);
       }
     } catch (e) {
@@ -118,7 +149,6 @@ class _BirthDatePickerState extends State<BirthDatePicker> {
         children: [
           TextField(
             controller: _dateController,
-            style: ComTextStyle.body3.w400.gs1000,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               TextInputFormatter.withFunction((oldValue, newValue) {
@@ -130,39 +160,39 @@ class _BirthDatePickerState extends State<BirthDatePicker> {
               }),
             ],
             decoration: InputDecoration(
-                labelText: widget.labelText,
-                labelStyle: ComTextStyle.caption.gs800,
-                hintText: widget.hintText,
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.calendar_today),
-                  onPressed: _pickDateFromCalendar,
+              labelText: widget.labelText,
+              labelStyle: ComTextStyle.caption.gs800,
+              hintText: widget.hintText,
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.calendar_today),
+                onPressed: _pickDateFromCalendar,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor!,
+                  width: widget.widthBorder,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: borderColor!,
-                    width: widget.widthBorder,
-                  ),
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor!,
+                  width: ds2,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: borderColor!,
-                    width: ds2,
-                  ),
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: ds16,
+                vertical: ds13,
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor!,
+                  width: widget.widthBorder,
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: ds16,
-                  vertical: ds8,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: borderColor!,
-                    width: widget.widthBorder,
-                  ),
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
-                ),
-                counter: null),
+                borderRadius: BorderRadius.circular(widget.borderRadius),
+              ),
+            ),
             keyboardType: TextInputType.datetime,
             onSubmitted: _validateAndSetDate,
             maxLength: 10,

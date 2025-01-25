@@ -38,7 +38,7 @@ class CardTournament extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 160,
-                    child: ImageSvg(
+                    child: ComImageSvg(
                       pathNetwork: tournament.imageUrl,
                       fit: BoxFit.cover,
                       width: double.infinity,

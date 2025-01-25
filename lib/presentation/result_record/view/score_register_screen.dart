@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_torneos/presentation/result_record/controller/score_register_controller.dart';
 
-import '../../../components/input_text.dart';
+import '../../../components/com_input_text.dart';
 import '../../../core/common/common.dart';
 import '../../../core/style/style.dart';
 import '../../../src/models/models.dart';

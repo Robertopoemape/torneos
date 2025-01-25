@@ -152,7 +152,7 @@ class RegisterTeamVballScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    BirthDatePicker(
+                    ComDatePicker.dateSelection(
                       labelText: 'Fecha de nacimiento',
                       initialDate: DateTime(2000, 1, 1),
                       onDateSelected: (date) {
