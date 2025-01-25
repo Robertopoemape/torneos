@@ -11,7 +11,7 @@ class RegisterTournamentController extends ChangeNotifier {
   final TextEditingController matchDateController = TextEditingController();
   final TextEditingController matchHourController = TextEditingController();
   final TextEditingController teamLocalController = TextEditingController();
-  final TextEditingController teamVisitanteController = TextEditingController();
+  final TextEditingController teamVisitantController = TextEditingController();
 
   void clearTournament() {
     nameController.clear();
@@ -26,7 +26,7 @@ class RegisterTournamentController extends ChangeNotifier {
     matchDateController.clear();
     matchHourController.clear();
     teamLocalController.clear();
-    teamVisitanteController.clear();
+    teamVisitantController.clear();
   }
 
   @override
@@ -40,7 +40,7 @@ class RegisterTournamentController extends ChangeNotifier {
     matchDateController.dispose();
     matchHourController.dispose();
     teamLocalController.dispose();
-    teamVisitanteController.dispose();
+    teamVisitantController.dispose();
     super.dispose();
   }
 }

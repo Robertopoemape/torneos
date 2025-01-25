@@ -3,14 +3,14 @@ class MatchesData {
   final String dateStart;
   final String hour;
   final String teamLocal;
-  final String teamVisitante;
+  final String teamVisitant;
 
   MatchesData({
     required this.tournamentId,
     required this.dateStart,
     required this.hour,
     required this.teamLocal,
-    required this.teamVisitante,
+    required this.teamVisitant,
   });
 
   factory MatchesData.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ class MatchesData {
       dateStart: json['dateStart'],
       hour: json['hour'],
       teamLocal: json['teamLocal'],
-      teamVisitante: json['teamVisitante'],
+      teamVisitant: json['teamVisitant'],
     );
   }
   Map<String, dynamic> toJson() {
@@ -28,7 +28,7 @@ class MatchesData {
       'dateStart': dateStart,
       'hour': hour,
       'teamLocal': teamLocal,
-      'teamVisitante': teamVisitante,
+      'teamVisitant': teamVisitant,
     };
   }
 }

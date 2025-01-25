@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../components/components.dart';
 import '../../../core/core.dart';
 import '../register_tournament.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
 class RegisterTournamentScreen extends StatefulWidget {
@@ -107,7 +108,7 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                               labelText: 'Equipo Local',
                             ),
                             _buildTextInput(
-                              controller: controller.teamVisitanteController,
+                              controller: controller.teamVisitantController,
                               labelText: 'Equipo Visitante',
                             ),
                             gap4,
@@ -123,14 +124,17 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                             ),
                             if (viewModel.matches.isNotEmpty) ...[
                               gap4,
-                              _buildMatchList(viewModel),
+                              MatchList(
+                                matches: viewModel.matches,
+                              ),
                             ]
                           ],
                         ),
                       ),
                     ),
-                    gap30,
+                    gap16,
                     ComButton(
+                      alignment: Alignment.center,
                       onPressed: () {
                         viewModel.registerTournament(context);
                       },
@@ -170,31 +174,5 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
 
   Widget _buildSectionTitle(String title) {
     return Text(title, style: ComTextStyle.h6);
-  }
-
-  Widget _buildMatchList(RegisterTournamentVm viewModel) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: viewModel.matches.length,
-      itemBuilder: (context, index) {
-        final match = viewModel.matches[index];
-        return Card(
-          elevation: 4,
-          margin: const EdgeInsets.symmetric(vertical: ds8),
-          child: ListTile(
-            title: Text(
-              '${match.teamLocal} vs ${match.teamVisitante}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text('${match.dateStart} - ${match.hour}'),
-            trailing: Icon(Icons.delete, color: ComColors.err500),
-            onTap: () {
-              viewModel.removeMatchAt(index);
-            },
-          ),
-        );
-      },
-    );
   }
 }

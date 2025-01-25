@@ -41,7 +41,7 @@ class RegisterTournamentVm extends ChangeNotifier {
           dateStart: match.dateStart,
           hour: match.hour,
           teamLocal: match.teamLocal,
-          teamVisitante: match.teamVisitante,
+          teamVisitant: match.teamVisitant,
         );
 
         await FirebaseFirestore.instance
@@ -67,7 +67,7 @@ class RegisterTournamentVm extends ChangeNotifier {
       dateStart: _controller.matchDateController.text,
       hour: _controller.matchHourController.text,
       teamLocal: _controller.teamLocalController.text,
-      teamVisitante: _controller.teamVisitanteController.text,
+      teamVisitant: _controller.teamVisitantController.text,
     );
 
     matches.add(match);

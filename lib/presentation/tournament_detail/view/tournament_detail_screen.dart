@@ -90,7 +90,7 @@ class TournamentScreenContent extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: ListTile(
                       title:
-                          Text('${match.teamLocal} vs ${match.teamVisitante}'),
+                          Text('${match.teamLocal} vs ${match.teamVisitant}'),
                       subtitle: Text(
                         'Fecha: ${match.dateStart} | Hora: ${match.hour}',
                       ),
@@ -101,7 +101,7 @@ class TournamentScreenContent extends StatelessWidget {
                           RegisterSetsVballRoute(
                               tournamentId: match.tournamentId,
                               localTeam: match.teamLocal,
-                              visitantTeam: match.teamVisitante),
+                              visitantTeam: match.teamVisitant),
                         );
                       },
                     ),
