@@ -34,7 +34,7 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
               foregroundColor: ComColors.gsWhite,
               centerTitle: true,
               title: Text(
-                'Registro de Torneo',
+                'Registra tu torneo',
                 style: ComTextStyle.h6.gsWhite,
               ),
             ),
@@ -81,9 +81,9 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                             ],
                           ),
                         )),
-                    gap16,
+                    gap8,
                     ComDivider(),
-                    gap16,
+                    gap8,
                     Card(
                       elevation: ds4,
                       shape: RoundedRectangleBorder(
@@ -110,13 +110,19 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                               controller: controller.teamVisitanteController,
                               labelText: 'Equipo Visitante',
                             ),
-                            gap8,
-                            _buildElevatedButton(
+                            gap4,
+                            ComButton(
                               onPressed: viewModel.addMatch,
-                              text: 'Agregar Partido',
+                              text: 'Agregar',
+                              height: ds25,
+                              padding: EdgeInsets.symmetric(horizontal: ds10),
+                              backgroundColor: null,
+                              labelColor: ComColors.inf800,
+                              borderColor: ComColors.inf800,
+                              isActivatedIcon: true,
                             ),
                             if (viewModel.matches.isNotEmpty) ...[
-                              gap8,
+                              gap4,
                               _buildMatchList(viewModel),
                             ]
                           ],
@@ -124,15 +130,11 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                       ),
                     ),
                     gap30,
-                    Center(
-                      child: _buildElevatedButton(
-                        onPressed: () {
-                          viewModel.registerTournament(context);
-                        },
-                        text: 'Registrar Torneo y Partidos',
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: ds24, vertical: ds12),
-                      ),
+                    ComButton(
+                      onPressed: () {
+                        viewModel.registerTournament(context);
+                      },
+                      text: 'Registrar Torneo y Partidos',
                     ),
                   ],
                 ),
@@ -163,30 +165,6 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
       labelText: labelText,
       initialDate: DateTime.now(),
       onDateSelected: onDateSelected,
-    );
-  }
-
-  Widget _buildElevatedButton({
-    required VoidCallback onPressed,
-    required String text,
-    EdgeInsets? padding,
-  }) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        iconAlignment: IconAlignment.end,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ComColors.succ500,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        child: Padding(
-          padding: padding ?? const EdgeInsets.symmetric(vertical: ds12),
-          child: Text(text, style: ComTextStyle.button1.gsWhite),
-        ),
-      ),
     );
   }
 
