@@ -100,7 +100,12 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                               labelText: 'Fecha de Inicio',
                               onDateSelected: (date) {},
                             ),
-                            ComTimePicker(),
+                            ComTimePicker(
+                              matchHourController:
+                                  controller.matchDateController,
+                              matchMinutesController:
+                                  controller.matchMinutesController,
+                            ),
                             _buildTextInput(
                               controller: controller.teamLocalController,
                               labelText: 'Equipo Local',

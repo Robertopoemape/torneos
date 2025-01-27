@@ -58,28 +58,27 @@ class _SplashScreenState extends State<SplashScreen>
             ),
           ),
           Center(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: ComImageSvg(pathNetwork: ComSvg.logo.path),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: ComImageSvg(pathNetwork: ComSvg.logo.path),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: const CircularProgressIndicator(
+                    color: ComColors.white,
+                    strokeWidth: 2,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class NextScreen extends StatelessWidget {
-  const NextScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ComColors.blue500,
-        title: const Text('Next Screen'),
-      ),
-      body: const Center(child: Text('Bienvenido a la siguiente pantalla')),
     );
   }
 }

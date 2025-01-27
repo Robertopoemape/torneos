@@ -45,8 +45,6 @@ class _ComInputTextState extends State<ComInputText> {
     borderColor = widget.borderColor ?? ComColors.black500;
     internalController = widget.controller ?? TextEditingController();
 
-    // Asignar el valor inicial si está definido
-
     internalController!.addListener(() {
       if (mounted) {
         setState(() {

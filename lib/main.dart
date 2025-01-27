@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:proyecto_torneos/core/core.dart';
 import 'package:proyecto_torneos/firebase_options.dart';
 
 import 'core/router/router_provider_micro.dart';
@@ -23,8 +24,13 @@ class MyApp extends StatelessWidget {
         navigatorObservers: () => [],
       ),
       routeInformationParser: appRouter.defaultRouteParser(),
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        splashColor: ComColors.blue500.withOpacity(0.2),
+        highlightColor: Colors.transparent,
+        // primarySwatch: Colors.blue,
+        primaryColor: ComColors.blue500,
+        scaffoldBackgroundColor: ComColors.white, // Camb
       ),
     );
   }

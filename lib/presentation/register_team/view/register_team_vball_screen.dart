@@ -170,16 +170,10 @@ class RegisterTeamVballScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: viewModel.addTeam,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 32, vertical: 16),
-                          textStyle: const TextStyle(fontSize: 18),
-                        ),
-                        child: const Text('Registrar Equipo'),
-                      ),
+                    ComButton(
+                      alignment: Alignment.center,
+                      text: 'Registrar Jugador',
+                      onPressed: () {},
                     ),
                   ],
                 ),
