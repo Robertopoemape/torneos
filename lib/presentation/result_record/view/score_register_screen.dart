@@ -100,7 +100,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
         appBar: AppBar(
           title: const Text('Registro de resultado'),
           centerTitle: true,
-          backgroundColor: ComColors.green500,
+          backgroundColor: ComColors.blue500,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

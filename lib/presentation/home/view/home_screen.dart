@@ -30,7 +30,7 @@ class HomeScreenContent extends StatelessWidget {
     return Scaffold(
       drawer: const DrawerMenuHeaderScreen(),
       appBar: AppBar(
-        backgroundColor: ComColors.green500,
+        backgroundColor: ComColors.blue500,
         foregroundColor: ComColors.white,
         centerTitle: true,
         title: Text(

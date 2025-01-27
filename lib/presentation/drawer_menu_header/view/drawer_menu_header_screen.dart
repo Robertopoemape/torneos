@@ -17,7 +17,7 @@ class DrawerMenuHeaderScreen extends StatelessWidget {
       create: (_) => DrawerMenuHeaderVm(),
       child: Consumer<DrawerMenuHeaderVm>(builder: (context, viewModel, _) {
         return Drawer(
-          backgroundColor: ComColors.green500,
+          backgroundColor: ComColors.blue500,
           elevation: 40,
           width: 340,
           child: DrawerHeader(

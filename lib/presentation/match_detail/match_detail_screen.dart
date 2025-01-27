@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/core.dart';
+
 @RoutePage()
 class MatchDetailScreen extends StatelessWidget {
   final String matchId;
@@ -28,7 +30,7 @@ class MatchDetailScreen extends StatelessWidget {
           "Detalle del Partido",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: ComColors.blue500,
         centerTitle: true,
       ),
       body: Padding(

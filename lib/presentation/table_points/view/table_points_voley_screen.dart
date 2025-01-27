@@ -24,7 +24,7 @@ class TablePointsVoleyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ComColors.green500,
+        backgroundColor: ComColors.blue500,
         foregroundColor: ComColors.white,
         title: Text(
           'Tabla de Puntos',

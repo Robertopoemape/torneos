@@ -37,7 +37,7 @@ class TournamentScreenContent extends StatelessWidget {
           viewModel.tournamentData.nameTournament,
           style: ComTextStyle.h6.white,
         ),
-        backgroundColor: ComColors.green500,
+        backgroundColor: ComColors.blue500,
         foregroundColor: ComColors.white,
         centerTitle: true,
       ),

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_torneos/components/components.dart';
 
 import '../core/core.dart';
 import '../presentation/register_tournament/controller/register_tournament_vball_controller.dart';

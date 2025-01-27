@@ -32,7 +32,7 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: ComColors.green500,
+              backgroundColor: ComColors.blue500,
               foregroundColor: ComColors.white,
               centerTitle: true,
               title: Text(

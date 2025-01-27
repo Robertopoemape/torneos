@@ -39,6 +39,7 @@ class RegisterSetsVballScreen extends StatelessWidget {
           final controller = context.read<VolleyballMatchesController>();
           return Scaffold(
             appBar: _buildAppBar(),
+            backgroundColor: ComColors.blue500,
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(ds16),

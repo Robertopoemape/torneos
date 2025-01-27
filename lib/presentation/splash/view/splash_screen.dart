@@ -75,7 +75,10 @@ class NextScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Next Screen')),
+      appBar: AppBar(
+        backgroundColor: ComColors.blue500,
+        title: const Text('Next Screen'),
+      ),
       body: const Center(child: Text('Bienvenido a la siguiente pantalla')),
     );
   }
