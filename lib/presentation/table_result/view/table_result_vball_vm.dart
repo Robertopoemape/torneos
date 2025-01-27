@@ -55,7 +55,7 @@ class TableResultVoleyVm extends ChangeNotifier {
         label: Center(
           child: Text(
             name,
-            style: ComTextStyle.body2.w900.sec500,
+            style: ComTextStyle.body2.w900.black500,
           ),
         ),
       );

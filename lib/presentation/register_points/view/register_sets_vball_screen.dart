@@ -107,12 +107,12 @@ class RegisterSetsVballScreen extends StatelessWidget {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: ComColors.succ500,
-      foregroundColor: ComColors.gsWhite,
+      backgroundColor: ComColors.green500,
+      foregroundColor: ComColors.white,
       centerTitle: true,
       title: Text(
         'Registro de sets',
-        style: ComTextStyle.h6.gsWhite,
+        style: ComTextStyle.h6.white,
       ),
     );
   }

@@ -100,7 +100,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
         appBar: AppBar(
           title: const Text('Registro de resultado'),
           centerTitle: true,
-          backgroundColor: ComColors.succ500,
+          backgroundColor: ComColors.green500,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -177,7 +177,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      backgroundColor: ComColors.succ500,
+                      backgroundColor: ComColors.green500,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16),
                       textStyle: ComTextStyle.button2,
@@ -195,7 +195,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
   Widget _buildHeader(String title, IconData icon) {
     return Row(
       children: [
-        Icon(icon, color: ComColors.sec500, size: 28),
+        Icon(icon, color: ComColors.black500, size: 28),
         space8,
         Text(title, style: ComTextStyle.h6.w700),
       ],
@@ -208,7 +208,7 @@ class _ResultRecordScreenState extends State<ResultRecordScreen> {
       children: [
         Row(
           children: [
-            Icon(icon, color: ComColors.succ500),
+            Icon(icon, color: ComColors.green500),
             space8,
             Text(title, style: ComTextStyle.subtitle1),
           ],

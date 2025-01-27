@@ -24,11 +24,11 @@ class TablePointsVoleyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ComColors.succ500,
-        foregroundColor: ComColors.gsWhite,
+        backgroundColor: ComColors.green500,
+        foregroundColor: ComColors.white,
         title: Text(
           'Tabla de Puntos',
-          style: ComTextStyle.h6.gsWhite,
+          style: ComTextStyle.h6.white,
         ),
       ),
       body: FutureBuilder<List<MatchData>>(
@@ -64,22 +64,22 @@ class MatchDataTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         headingRowColor: WidgetStateProperty.resolveWith(
-          (states) => ComColors.gs600,
+          (states) => ComColors.white600,
         ),
         headingTextStyle: ComTextStyle.body2.copyWith(
           fontWeight: FontWeight.bold,
-          color: ComColors.gsWhite,
+          color: ComColors.white,
         ),
         dataRowColor: WidgetStateProperty.resolveWith(
           (states) =>
-              states.contains(WidgetState.selected) ? ComColors.inf500 : null,
+              states.contains(WidgetState.selected) ? ComColors.blue500 : null,
         ),
         dataTextStyle: ComTextStyle.body2.copyWith(fontSize: 14),
         columnSpacing: 20,
         headingRowHeight: 40,
         horizontalMargin: 16,
         border: TableBorder.symmetric(
-          inside: BorderSide(color: ComColors.gs300, width: 1),
+          inside: BorderSide(color: ComColors.white300, width: 1),
         ),
         columns: [
           _buildColumn('Pos.'),
@@ -106,7 +106,7 @@ class MatchDataTable extends StatelessWidget {
 
           return DataRow(
             color: WidgetStateProperty.resolveWith(
-              (states) => index.isEven ? ComColors.supp100 : null,
+              (states) => index.isEven ? ComColors.black300 : null,
             ),
             cells: [
               DataCell(Text(data.position?.toString() ?? '-')),

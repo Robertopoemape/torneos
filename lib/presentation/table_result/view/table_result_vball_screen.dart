@@ -17,12 +17,12 @@ class TableResultVoleyScreen extends StatelessWidget {
       create: (_) => TableResultVoleyVm(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: ComColors.succ500,
-          foregroundColor: ComColors.gsWhite,
+          backgroundColor: ComColors.green500,
+          foregroundColor: ComColors.white,
           centerTitle: true,
           title: Text(
             'Resultados',
-            style: ComTextStyle.h6.gsWhite,
+            style: ComTextStyle.h6.white,
           ),
         ),
         body: Consumer<TableResultVoleyVm>(

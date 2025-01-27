@@ -23,7 +23,7 @@ class PhotoUserProfile extends StatelessWidget {
             const Spacer(),
             Text(
               lblTitle,
-              style: ComTextStyle.body1.w800.gsWhite,
+              style: ComTextStyle.body1.w800.white,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
@@ -31,7 +31,7 @@ class PhotoUserProfile extends StatelessWidget {
               onTap: () => autoRouterPop(context),
               child: Icon(
                 Icons.close,
-                color: ComColors.gsWhite,
+                color: ComColors.white,
                 size: ds20,
               ),
             ),
@@ -42,10 +42,10 @@ class PhotoUserProfile extends StatelessWidget {
           children: [
             Center(
               child: CircleAvatar(
-                backgroundColor: ComColors.gs300,
+                backgroundColor: ComColors.white300,
                 radius: 115,
                 child: CircleAvatar(
-                  backgroundColor: ComColors.succ500,
+                  backgroundColor: ComColors.green500,
                   radius: 110,
                   child: ComImageSvg(
                     pathNetwork: playerPhotoUrl,

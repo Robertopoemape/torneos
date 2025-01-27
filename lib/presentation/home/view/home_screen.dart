@@ -30,12 +30,12 @@ class HomeScreenContent extends StatelessWidget {
     return Scaffold(
       drawer: const DrawerMenuHeaderScreen(),
       appBar: AppBar(
-        backgroundColor: ComColors.succ500,
-        foregroundColor: ComColors.gsWhite,
+        backgroundColor: ComColors.green500,
+        foregroundColor: ComColors.white,
         centerTitle: true,
         title: Text(
           'Inicio',
-          style: ComTextStyle.h6.gsWhite,
+          style: ComTextStyle.h6.white,
         ),
         actions: [
           CustomPopupMenu(

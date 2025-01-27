@@ -25,12 +25,12 @@ class RegisterTeamVballScreen extends StatelessWidget {
           final controller = context.read<RegisterTeamController>();
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: ComColors.succ500,
-              foregroundColor: ComColors.gsWhite,
+              backgroundColor: ComColors.green500,
+              foregroundColor: ComColors.white,
               centerTitle: true,
               title: Text(
                 'Registro de equipos',
-                style: ComTextStyle.h6.gsWhite,
+                style: ComTextStyle.h6.white,
               ),
             ),
             body: Form(
@@ -145,7 +145,7 @@ class RegisterTeamVballScreen extends StatelessWidget {
                             ),
                             child: Icon(
                               Icons.camera_alt,
-                              color: ComColors.sec500,
+                              color: ComColors.black500,
                               size: 24,
                             ),
                           ),

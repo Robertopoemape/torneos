@@ -32,12 +32,12 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: ComColors.succ500,
-              foregroundColor: ComColors.gsWhite,
+              backgroundColor: ComColors.green500,
+              foregroundColor: ComColors.white,
               centerTitle: true,
               title: Text(
                 'Registra tu torneo',
-                style: ComTextStyle.h6.gsWhite,
+                style: ComTextStyle.h6.white,
               ),
             ),
             body: Padding(
@@ -116,7 +116,7 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                               height: ds25,
                               padding: EdgeInsets.symmetric(horizontal: ds10),
                               backgroundColor: null,
-                              labelColor: ComColors.inf600,
+                              labelColor: ComColors.blue600,
                               borderColor: Colors.transparent,
                               isActivatedIcon: true,
                             ),

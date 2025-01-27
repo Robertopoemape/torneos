@@ -32,7 +32,7 @@ class CardTournament extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(ds8),
-                color: ComColors.gs100,
+                color: ComColors.white100,
               ),
               child: Column(
                 children: [

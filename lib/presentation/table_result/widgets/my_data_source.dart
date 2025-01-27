@@ -31,14 +31,14 @@ class MyDataSource extends DataGridSource {
 
   Widget _buildCell(DataGridCell cell) {
     final colorMap = {
-      's1': ComColors.gs100,
-      's2': ComColors.gs200,
-      's3': ComColors.gs300,
-      's4': ComColors.gs400,
-      's5': ComColors.gs500,
-      'resultado': ComColors.gs600,
-      'puntaje': ComColors.gs700,
-      'puntos': ComColors.gs800,
+      's1': ComColors.white100,
+      's2': ComColors.white200,
+      's3': ComColors.white300,
+      's4': ComColors.white400,
+      's5': ComColors.white500,
+      'resultado': ComColors.white600,
+      'puntaje': ComColors.white700,
+      'puntos': ComColors.white800,
     };
 
     final cellColor = colorMap[cell.columnName] ?? Colors.transparent;
@@ -48,7 +48,7 @@ class MyDataSource extends DataGridSource {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: cellColor,
-        border: Border.all(color: ComColors.gs400),
+        border: Border.all(color: ComColors.white400),
       ),
       child: Text(
         cell.value.toString(),

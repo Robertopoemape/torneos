@@ -22,7 +22,7 @@ class TrapezoidWithVS extends StatelessWidget {
         Positioned(
           child: Text(
             label,
-            style: ComTextStyle.h6.gsWhite,
+            style: ComTextStyle.h6.white,
           ),
         ),
       ],
@@ -34,7 +34,7 @@ class _TrapezoidPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..color = ComColors.sec600
+      ..color = ComColors.black600
       ..style = PaintingStyle.fill;
 
     final Path path = Path();

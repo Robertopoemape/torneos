@@ -121,7 +121,7 @@ class _ComImageSvgState extends State<ComImageSvg> {
             width: widget.width,
             fit: widget.fit ?? BoxFit.contain,
             colorFilter: ColorFilter.mode(
-                widget.color ?? ComColors.sec800, BlendMode.srcIn),
+                widget.color ?? ComColors.black800, BlendMode.srcIn),
             widget.pathNetwork,
             placeholderBuilder: (BuildContext context) => _crearSkeleton(),
           ),
@@ -150,7 +150,7 @@ class _ComImageSvgState extends State<ComImageSvg> {
           width: widget.width,
           fit: widget.fit ?? BoxFit.contain,
           colorFilter: ColorFilter.mode(
-              widget.color ?? ComColors.sec800, BlendMode.srcIn),
+              widget.color ?? ComColors.black800, BlendMode.srcIn),
           placeholder: _crearSkeleton(),
           errorWidget: _crearWidgetError(),
         );

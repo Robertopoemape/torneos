@@ -12,7 +12,7 @@ Future<void> showSelectionDialog({
         builder: (BuildContext context) => AlertDialog(
             title: Text(
               'Selecciona una opción para subir tu foto.',
-              style: ComTextStyle.body2.sec500,
+              style: ComTextStyle.body2.black500,
             ),
             content: SingleChildScrollView(
               child: ListBody(

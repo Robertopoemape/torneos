@@ -35,10 +35,10 @@ class TournamentScreenContent extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           viewModel.tournamentData.nameTournament,
-          style: ComTextStyle.h6.gsWhite,
+          style: ComTextStyle.h6.white,
         ),
-        backgroundColor: ComColors.succ500,
-        foregroundColor: ComColors.gsWhite,
+        backgroundColor: ComColors.green500,
+        foregroundColor: ComColors.white,
         centerTitle: true,
       ),
       body: Padding(

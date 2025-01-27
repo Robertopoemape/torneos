@@ -6,12 +6,12 @@ const String fontFamily = 'Furious';
 
 const TextStyle textStyle = TextStyle(
   fontFamily: font,
-  color: ComColors.gs1000,
+  color: ComColors.white1000,
 );
 
 const TextStyle textStyleFurious = TextStyle(
   fontFamily: fontFamily,
-  color: ComColors.gsWhite,
+  color: ComColors.white,
 );
 
 const double _display96Size = 96;
@@ -42,125 +42,89 @@ extension TextStyleWeightExtension on TextStyle {
 
 extension TextStyleColorExtension on TextStyle {
   // this grupo vitality colors is same to Colors.green light
-  TextStyle get pri100 => copyWith(color: ComColors.pri100);
-  TextStyle get pri200 => copyWith(color: ComColors.pri200);
-  TextStyle get pri300 => copyWith(color: ComColors.pri300);
-  TextStyle get pri400 => copyWith(color: ComColors.pri400);
-  TextStyle get pri500 => copyWith(color: ComColors.pri500);
-  TextStyle get pri600 => copyWith(color: ComColors.pri600);
-  TextStyle get pri700 => copyWith(color: ComColors.pri700);
-  TextStyle get pri800 => copyWith(color: ComColors.pri800);
-  TextStyle get pri900 => copyWith(color: ComColors.pri900);
-  TextStyle get pri1000 => copyWith(color: ComColors.pri1000);
+  TextStyle get greenL100 => copyWith(color: ComColors.greenL100);
+  TextStyle get greenL200 => copyWith(color: ComColors.greenL200);
+  TextStyle get greenL300 => copyWith(color: ComColors.greenL300);
+  TextStyle get greenL400 => copyWith(color: ComColors.greenL400);
+  TextStyle get greenL500 => copyWith(color: ComColors.greenL500);
+  TextStyle get greenL600 => copyWith(color: ComColors.greenL600);
+  TextStyle get greenL700 => copyWith(color: ComColors.greenL700);
+  TextStyle get greenL800 => copyWith(color: ComColors.greenL800);
+  TextStyle get greenL900 => copyWith(color: ComColors.greenL900);
+  TextStyle get greenL1000 => copyWith(color: ComColors.greenL1000);
 
   // this group of dark colors is equal to Colors.black
-  TextStyle get sec100 => copyWith(color: ComColors.sec100);
-  TextStyle get sec200 => copyWith(color: ComColors.sec200);
-  TextStyle get sec300 => copyWith(color: ComColors.sec300);
-  TextStyle get sec400 => copyWith(color: ComColors.sec400);
-  TextStyle get sec500 => copyWith(color: ComColors.sec500);
-  TextStyle get sec600 => copyWith(color: ComColors.sec600);
-  TextStyle get sec700 => copyWith(color: ComColors.sec700);
-  TextStyle get sec800 => copyWith(color: ComColors.sec800);
-  TextStyle get sec900 => copyWith(color: ComColors.sec900);
-  TextStyle get sec1000 => copyWith(color: ComColors.sec1000);
-
-  // this group of warning colors is equal to Colors.red light
-  TextStyle get act100 => copyWith(color: ComColors.act100);
-  TextStyle get act200 => copyWith(color: ComColors.act200);
-  TextStyle get act300 => copyWith(color: ComColors.act300);
-  TextStyle get act400 => copyWith(color: ComColors.act400);
-  TextStyle get act500 => copyWith(color: ComColors.act500);
-  TextStyle get act600 => copyWith(color: ComColors.act600);
-  TextStyle get act700 => copyWith(color: ComColors.act700);
-  TextStyle get act800 => copyWith(color: ComColors.act800);
-  TextStyle get act900 => copyWith(color: ComColors.act900);
-  TextStyle get act1000 => copyWith(color: ComColors.act1000);
-
-  // this group of atention colors is equal to Colors.amber
-  TextStyle get acce100 => copyWith(color: ComColors.acce100);
-  TextStyle get acce200 => copyWith(color: ComColors.acce200);
-  TextStyle get acce300 => copyWith(color: ComColors.acce300);
-  TextStyle get acce400 => copyWith(color: ComColors.acce400);
-  TextStyle get acce500 => copyWith(color: ComColors.acce500);
-  TextStyle get acce600 => copyWith(color: ComColors.acce600);
-  TextStyle get acce700 => copyWith(color: ComColors.acce700);
-  TextStyle get acce800 => copyWith(color: ComColors.acce800);
-  TextStyle get acce900 => copyWith(color: ComColors.acce900);
-  TextStyle get acce1000 => copyWith(color: ComColors.acce1000);
-
-  // this group of support colors is equal to Colors.purple
-  TextStyle get supp100 => copyWith(color: ComColors.supp100);
-  TextStyle get supp200 => copyWith(color: ComColors.supp200);
-  TextStyle get supp300 => copyWith(color: ComColors.supp300);
-  TextStyle get supp400 => copyWith(color: ComColors.supp400);
-  TextStyle get supp500 => copyWith(color: ComColors.supp500);
-  TextStyle get supp600 => copyWith(color: ComColors.supp600);
-  TextStyle get supp700 => copyWith(color: ComColors.supp700);
-  TextStyle get supp800 => copyWith(color: ComColors.supp800);
-  TextStyle get supp900 => copyWith(color: ComColors.supp900);
-  TextStyle get supp1000 => copyWith(color: ComColors.supp1000);
+  TextStyle get black100 => copyWith(color: ComColors.black100);
+  TextStyle get black200 => copyWith(color: ComColors.black200);
+  TextStyle get black300 => copyWith(color: ComColors.black300);
+  TextStyle get black400 => copyWith(color: ComColors.black400);
+  TextStyle get black500 => copyWith(color: ComColors.black500);
+  TextStyle get black600 => copyWith(color: ComColors.black600);
+  TextStyle get black700 => copyWith(color: ComColors.black700);
+  TextStyle get black800 => copyWith(color: ComColors.black800);
+  TextStyle get black900 => copyWith(color: ComColors.black900);
+  TextStyle get black1000 => copyWith(color: ComColors.black1000);
 
   // this group of success colors is equal to Colors.green
-  TextStyle get succ100 => copyWith(color: ComColors.succ100);
-  TextStyle get succ200 => copyWith(color: ComColors.succ200);
-  TextStyle get succ300 => copyWith(color: ComColors.succ300);
-  TextStyle get succ400 => copyWith(color: ComColors.succ400);
-  TextStyle get succ500 => copyWith(color: ComColors.succ500);
-  TextStyle get succ600 => copyWith(color: ComColors.succ600);
-  TextStyle get succ700 => copyWith(color: ComColors.succ700);
-  TextStyle get succ800 => copyWith(color: ComColors.succ800);
-  TextStyle get succ900 => copyWith(color: ComColors.succ900);
-  TextStyle get succ1000 => copyWith(color: ComColors.succ1000);
+  TextStyle get green100 => copyWith(color: ComColors.green100);
+  TextStyle get green200 => copyWith(color: ComColors.green200);
+  TextStyle get green300 => copyWith(color: ComColors.green300);
+  TextStyle get green400 => copyWith(color: ComColors.green400);
+  TextStyle get green500 => copyWith(color: ComColors.green500);
+  TextStyle get green600 => copyWith(color: ComColors.green600);
+  TextStyle get green700 => copyWith(color: ComColors.green700);
+  TextStyle get green800 => copyWith(color: ComColors.green800);
+  TextStyle get green900 => copyWith(color: ComColors.green900);
+  TextStyle get green1000 => copyWith(color: ComColors.green1000);
 
   // this grupo warning colors is same to Colors.orange
-  TextStyle get war100 => copyWith(color: ComColors.war100);
-  TextStyle get war200 => copyWith(color: ComColors.war200);
-  TextStyle get war300 => copyWith(color: ComColors.war300);
-  TextStyle get war400 => copyWith(color: ComColors.war400);
-  TextStyle get war500 => copyWith(color: ComColors.war500);
-  TextStyle get war600 => copyWith(color: ComColors.war600);
-  TextStyle get war700 => copyWith(color: ComColors.war700);
-  TextStyle get war800 => copyWith(color: ComColors.war800);
-  TextStyle get war900 => copyWith(color: ComColors.war900);
-  TextStyle get war1000 => copyWith(color: ComColors.war1000);
+  TextStyle get oran100 => copyWith(color: ComColors.oran100);
+  TextStyle get oran200 => copyWith(color: ComColors.oran200);
+  TextStyle get oran300 => copyWith(color: ComColors.oran300);
+  TextStyle get oran400 => copyWith(color: ComColors.oran400);
+  TextStyle get oran500 => copyWith(color: ComColors.oran500);
+  TextStyle get oran600 => copyWith(color: ComColors.oran600);
+  TextStyle get oran700 => copyWith(color: ComColors.oran700);
+  TextStyle get oran800 => copyWith(color: ComColors.oran800);
+  TextStyle get oran900 => copyWith(color: ComColors.oran900);
+  TextStyle get oran1000 => copyWith(color: ComColors.oran1000);
 
   // this grupo error colors is same to Colors.red
-  TextStyle get err100 => copyWith(color: ComColors.err100);
-  TextStyle get err200 => copyWith(color: ComColors.err200);
-  TextStyle get err300 => copyWith(color: ComColors.err300);
-  TextStyle get err400 => copyWith(color: ComColors.err400);
-  TextStyle get err500 => copyWith(color: ComColors.err500);
-  TextStyle get err600 => copyWith(color: ComColors.err600);
-  TextStyle get err700 => copyWith(color: ComColors.err700);
-  TextStyle get err800 => copyWith(color: ComColors.err800);
-  TextStyle get err900 => copyWith(color: ComColors.err900);
-  TextStyle get err1000 => copyWith(color: ComColors.err1000);
+  TextStyle get red100 => copyWith(color: ComColors.red100);
+  TextStyle get red200 => copyWith(color: ComColors.red200);
+  TextStyle get red300 => copyWith(color: ComColors.red300);
+  TextStyle get red400 => copyWith(color: ComColors.red400);
+  TextStyle get red500 => copyWith(color: ComColors.red500);
+  TextStyle get red600 => copyWith(color: ComColors.red600);
+  TextStyle get red700 => copyWith(color: ComColors.red700);
+  TextStyle get red800 => copyWith(color: ComColors.red800);
+  TextStyle get red900 => copyWith(color: ComColors.red900);
+  TextStyle get red1000 => copyWith(color: ComColors.red1000);
 
   // this grupo information colors is same to Colors.blue
-  TextStyle get inf100 => copyWith(color: ComColors.inf100);
-  TextStyle get inf200 => copyWith(color: ComColors.inf200);
-  TextStyle get inf300 => copyWith(color: ComColors.inf300);
-  TextStyle get inf400 => copyWith(color: ComColors.inf400);
-  TextStyle get inf500 => copyWith(color: ComColors.inf500);
-  TextStyle get inf600 => copyWith(color: ComColors.inf600);
-  TextStyle get inf700 => copyWith(color: ComColors.inf700);
-  TextStyle get inf800 => copyWith(color: ComColors.inf800);
-  TextStyle get inf900 => copyWith(color: ComColors.inf900);
-  TextStyle get inf1000 => copyWith(color: ComColors.inf1000);
+  TextStyle get blue100 => copyWith(color: ComColors.blue100);
+  TextStyle get blue200 => copyWith(color: ComColors.blue200);
+  TextStyle get blue300 => copyWith(color: ComColors.blue300);
+  TextStyle get blue400 => copyWith(color: ComColors.blue400);
+  TextStyle get blue500 => copyWith(color: ComColors.blue500);
+  TextStyle get blue600 => copyWith(color: ComColors.blue600);
+  TextStyle get blue700 => copyWith(color: ComColors.blue700);
+  TextStyle get blue800 => copyWith(color: ComColors.blue800);
+  TextStyle get blue900 => copyWith(color: ComColors.blue900);
+  TextStyle get blue1000 => copyWith(color: ComColors.blue1000);
 
   // this grupo grayscale colors is same to Colors.gray
-  TextStyle get gsWhite => copyWith(color: ComColors.gsWhite);
-  TextStyle get gs100 => copyWith(color: ComColors.gs100);
-  TextStyle get gs200 => copyWith(color: ComColors.gs200);
-  TextStyle get gs300 => copyWith(color: ComColors.gs300);
-  TextStyle get gs400 => copyWith(color: ComColors.gs400);
-  TextStyle get gs500 => copyWith(color: ComColors.gs500);
-  TextStyle get gs600 => copyWith(color: ComColors.gs600);
-  TextStyle get gs700 => copyWith(color: ComColors.gs700);
-  TextStyle get gs800 => copyWith(color: ComColors.gs800);
-  TextStyle get gs900 => copyWith(color: ComColors.gs900);
-  TextStyle get gs1000 => copyWith(color: ComColors.gs1000);
+  TextStyle get white => copyWith(color: ComColors.white);
+  TextStyle get white100 => copyWith(color: ComColors.white100);
+  TextStyle get white200 => copyWith(color: ComColors.white200);
+  TextStyle get white300 => copyWith(color: ComColors.white300);
+  TextStyle get white400 => copyWith(color: ComColors.white400);
+  TextStyle get white500 => copyWith(color: ComColors.white500);
+  TextStyle get white600 => copyWith(color: ComColors.white600);
+  TextStyle get white700 => copyWith(color: ComColors.white700);
+  TextStyle get white800 => copyWith(color: ComColors.white800);
+  TextStyle get white900 => copyWith(color: ComColors.white900);
+  TextStyle get white1000 => copyWith(color: ComColors.white1000);
 }
 
 abstract class ComTextStyle {

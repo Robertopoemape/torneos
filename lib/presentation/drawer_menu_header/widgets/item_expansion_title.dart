@@ -17,14 +17,14 @@ class ItemExpansionTitle extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
-      splashColor: ComColors.act300.withOpacity(0.2),
-      highlightColor: ComColors.gs200.withOpacity(0.2),
+      splashColor: ComColors.red300.withOpacity(0.2),
+      highlightColor: ComColors.white200.withOpacity(0.2),
       child: Container(
         padding: const EdgeInsets.all(8),
         alignment: Alignment.centerLeft,
         child: Text(
           name,
-          style: ComTextStyle.body2.gsWhite,
+          style: ComTextStyle.body2.white,
         ),
       ),
     );

@@ -62,10 +62,10 @@ class ComTimePickerState extends State<ComTimePicker> {
       decoration: BoxDecoration(
         color: const Color(0xFFf4ecf4),
         borderRadius: BorderRadius.circular(ds8),
-        border: Border.all(color: ComColors.sec500, width: ds1),
+        border: Border.all(color: ComColors.black500, width: ds1),
         boxShadow: [
           BoxShadow(
-            color: ComColors.sec800.withOpacity(0.1),
+            color: ComColors.black800.withOpacity(0.1),
             blurRadius: ds8,
             offset: const Offset(0, ds4),
           ),
@@ -96,7 +96,7 @@ class ComTimePickerState extends State<ComTimePicker> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: ComColors.sec500,
+          color: ComColors.black500,
           width: ds2,
         ),
       ),
@@ -117,7 +117,7 @@ class ComTimePickerState extends State<ComTimePicker> {
   Widget _buildMeridiemText(String meridiem) {
     return Text(
       meridiem,
-      style: ComTextStyle.h6.w900.sec800,
+      style: ComTextStyle.h6.w900.black800,
     );
   }
 
@@ -128,13 +128,13 @@ class ComTimePickerState extends State<ComTimePicker> {
         padding: const EdgeInsets.all(ds8),
         constraints: const BoxConstraints(maxWidth: ds200),
         decoration: BoxDecoration(
-          color: ComColors.inf200,
+          color: ComColors.blue200,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: ComColors.inf600,
+            color: ComColors.blue600,
             borderRadius: BorderRadius.circular(20),
           ),
           child: const Icon(Icons.access_time, color: Colors.white, size: 20),

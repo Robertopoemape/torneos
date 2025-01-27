@@ -79,7 +79,7 @@ class _ComDatePickerState extends State<ComDatePicker> {
   void initState() {
     super.initState();
 
-    borderColor = ComColors.sec500;
+    borderColor = ComColors.black500;
     _dateController = TextEditingController(
       text: widget.initialDate != null
           ? _dateFormat.format(widget.initialDate!)
@@ -99,7 +99,7 @@ class _ComDatePickerState extends State<ComDatePicker> {
       final error = DateValidator.validateDateSelection(parsedDate);
       setState(() {
         _errorMessage = error;
-        borderColor = error == null ? ComColors.succ500 : ComColors.err500;
+        borderColor = error == null ? ComColors.green500 : ComColors.red500;
       });
 
       if (error == null) {
@@ -108,7 +108,7 @@ class _ComDatePickerState extends State<ComDatePicker> {
     } catch (e) {
       setState(() {
         _errorMessage = "Fecha no válida.";
-        borderColor = ComColors.err500;
+        borderColor = ComColors.red500;
       });
     }
   }
@@ -161,7 +161,7 @@ class _ComDatePickerState extends State<ComDatePicker> {
             ],
             decoration: InputDecoration(
               labelText: widget.labelText,
-              labelStyle: ComTextStyle.caption.gs800,
+              labelStyle: ComTextStyle.caption.white800,
               hintText: widget.hintText,
               suffixIcon: IconButton(
                 icon: const Icon(Icons.calendar_today),

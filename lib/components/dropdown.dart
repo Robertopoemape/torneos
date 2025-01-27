@@ -44,7 +44,7 @@ class _DropdownState extends State<ComDropdown> {
   @override
   void initState() {
     super.initState();
-    borderColor = widget.borderColor ?? ComColors.sec500;
+    borderColor = widget.borderColor ?? ComColors.black500;
 
     internalController = widget.controller ?? TextEditingController();
 
@@ -52,7 +52,7 @@ class _DropdownState extends State<ComDropdown> {
       if (mounted) {
         setState(() {
           if (internalController!.text.isEmpty) {
-            borderColor = ComColors.sec500;
+            borderColor = ComColors.black500;
           } else {
             selectedValue = internalController!.text.isNotEmpty &&
                     widget.items.contains(internalController!.text)
@@ -94,13 +94,13 @@ class _DropdownState extends State<ComDropdown> {
                     children: [
                       Text(
                         widget.messageLabel,
-                        style: ComTextStyle.overline.sec600,
+                        style: ComTextStyle.overline.black600,
                       ),
                       const Spacer(),
                       if (widget.isOptional)
                         Text(
                           '*Opcional',
-                          style: ComTextStyle.overline.gs800,
+                          style: ComTextStyle.overline.white800,
                         ),
                     ],
                   ),
@@ -140,7 +140,7 @@ class _DropdownState extends State<ComDropdown> {
             ),
             hint: Text(
               widget.hintText,
-              style: ComTextStyle.caption.gs800,
+              style: ComTextStyle.caption.white800,
             ),
             icon: Icon(Icons.keyboard_arrow_down, size: 20),
             items: widget.items.map((method) {
@@ -157,7 +157,7 @@ class _DropdownState extends State<ComDropdown> {
                 setState(() {
                   internalController!.text = value ?? '';
                   selectedValue = value;
-                  borderColor = ComColors.succ500;
+                  borderColor = ComColors.green500;
                 });
 
                 widget.onChanged?.call(value);

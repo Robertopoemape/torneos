@@ -28,7 +28,7 @@ class DrawerOptions extends StatelessWidget {
         ),
         gap16,
         Divider(
-          color: ComColors.gs500,
+          color: ComColors.white500,
           height: 0,
         ),
         ...options.map(
@@ -37,20 +37,20 @@ class DrawerOptions extends StatelessWidget {
               InkWell(
                 onTap: option.onOptionSelected,
                 borderRadius: BorderRadius.circular(8),
-                splashColor: ComColors.act300.withOpacity(0.2),
-                highlightColor: ComColors.gs200.withOpacity(0.2),
+                splashColor: ComColors.red300.withOpacity(0.2),
+                highlightColor: ComColors.white200.withOpacity(0.2),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                       vertical: ds15, horizontal: ds8),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     option.title,
-                    style: ComTextStyle.body1.gsWhite,
+                    style: ComTextStyle.body1.white,
                   ),
                 ),
               ),
               Divider(
-                color: ComColors.gs500,
+                color: ComColors.white500,
                 thickness: 0.5,
                 height: 1,
               ),
@@ -59,25 +59,25 @@ class DrawerOptions extends StatelessWidget {
         ),
         ExpansionTitleConfig(),
         Divider(
-          color: ComColors.gs500,
+          color: ComColors.white500,
           height: 0,
         ),
         InkWell(
           borderRadius: BorderRadius.circular(8),
-          splashColor: ComColors.act300.withOpacity(0.2),
-          highlightColor: ComColors.gs200.withOpacity(0.2),
+          splashColor: ComColors.red300.withOpacity(0.2),
+          highlightColor: ComColors.white200.withOpacity(0.2),
           onTap: onLogout,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
             alignment: Alignment.centerLeft,
             child: Text(
               'Cerrar sesión',
-              style: ComTextStyle.body1.gsWhite,
+              style: ComTextStyle.body1.white,
             ),
           ),
         ),
         Divider(
-          color: ComColors.gs500,
+          color: ComColors.white500,
           height: 0,
         ),
       ],

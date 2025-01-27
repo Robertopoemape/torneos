@@ -42,7 +42,7 @@ class _ComInputTextState extends State<ComInputText> {
   @override
   void initState() {
     super.initState();
-    borderColor = widget.borderColor ?? ComColors.sec500;
+    borderColor = widget.borderColor ?? ComColors.black500;
     internalController = widget.controller ?? TextEditingController();
 
     // Asignar el valor inicial si está definido
@@ -51,7 +51,7 @@ class _ComInputTextState extends State<ComInputText> {
       if (mounted) {
         setState(() {
           if (internalController!.text.isEmpty) {
-            borderColor = ComColors.sec500;
+            borderColor = ComColors.black500;
           }
           if (widget.initialValue != null) {
             internalController!.text = widget.initialValue!;
@@ -75,11 +75,11 @@ class _ComInputTextState extends State<ComInputText> {
       padding: widget.paddingContent,
       child: TextFormField(
         controller: widget.controller,
-        style:
-            ComTextStyle.body3.w400.gs1000.copyWith(fontSize: widget.fontSize),
+        style: ComTextStyle.body3.w400.white1000
+            .copyWith(fontSize: widget.fontSize),
         decoration: InputDecoration(
           labelText: widget.labelText,
-          labelStyle: ComTextStyle.caption.gs800,
+          labelStyle: ComTextStyle.caption.white800,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: borderColor!,
@@ -112,12 +112,12 @@ class _ComInputTextState extends State<ComInputText> {
           setState(() {
             // valueLabel = value;
             if (value.isNotEmpty) {
-              borderColor = ComColors.succ500;
+              borderColor = ComColors.green500;
               //   messageLabel = widget.successLabel;
               //isError = false;
             } else {
               messageLabel = 'Este campo no puede estar vacío';
-              borderColor = ComColors.err500;
+              borderColor = ComColors.red500;
               //    isError = true;
             }
           });
