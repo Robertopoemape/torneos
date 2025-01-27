@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../core/core.dart';
@@ -20,76 +19,47 @@ class ComTimePicker extends StatefulWidget {
   final String? initialValue;
 
   @override
-  ComTimePickerState createState() => ComTimePickerState();
+  State<ComTimePicker> createState() => _ComTimePickerState();
 }
 
-class ComTimePickerState extends State<ComTimePicker> {
-  Color? borderColor;
-  TimeOfDay _selectedTime = TimeOfDay.now();
-  TextEditingController? internalControllerHour;
-  TextEditingController? internalControllerMinutes;
+class _ComTimePickerState extends State<ComTimePicker> {
+  late Color borderColor;
+  late TextEditingController hourController;
+  late TextEditingController minutesController;
+  TimeOfDay selectedTime = TimeOfDay.now();
   String matchMeridiem = '';
 
   @override
   void initState() {
     super.initState();
-    borderColor = widget.borderColor ?? const Color.fromRGBO(53, 67, 81, 1);
-    internalControllerHour =
-        widget.matchHourController ?? TextEditingController();
-    internalControllerMinutes =
-        widget.matchMinutesController ?? TextEditingController();
 
-    internalControllerHour!.addListener(() {
-      if (mounted) {
-        setState(() {
-          if (internalControllerHour!.text.isEmpty) {
-            borderColor = ComColors.black500;
-          }
-          if (widget.initialValue != null) {
-            internalControllerHour!.text = widget.initialValue!;
-          }
-        });
-      }
-    });
-    internalControllerMinutes!.addListener(() {
-      if (mounted) {
-        setState(() {
-          if (internalControllerMinutes!.text.isEmpty) {
-            borderColor = ComColors.black500;
-          }
-          if (widget.initialValue != null) {
-            internalControllerMinutes!.text = widget.initialValue!;
-          }
-        });
-      }
-    });
+    borderColor = widget.borderColor ?? ComColors.black500;
+
+    hourController = widget.matchHourController ?? TextEditingController();
+    minutesController =
+        widget.matchMinutesController ?? TextEditingController();
   }
 
   @override
   void dispose() {
-    if (widget.matchHourController == null ||
-        widget.matchHourController == null) {
-      internalControllerHour?.dispose();
-      internalControllerMinutes?.dispose();
-    }
+    if (widget.matchHourController == null) hourController.dispose();
+    if (widget.matchMinutesController == null) minutesController.dispose();
     super.dispose();
   }
 
   Future<void> _pickTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: _selectedTime,
+      initialTime: selectedTime,
     );
 
     if (pickedTime != null) {
       setState(() {
-        _selectedTime = pickedTime;
+        selectedTime = pickedTime;
 
         final formattedTime = _getFormattedTime();
-        // final controller = context.read<RegisterTournamentController>();
-
-        internalControllerHour!.text = formattedTime.substring(0, 1);
-        internalControllerMinutes!.text = formattedTime.substring(2, 4);
+        hourController.text = formattedTime.substring(0, 1);
+        minutesController.text = formattedTime.substring(2, 4);
         matchMeridiem = formattedTime.substring(5, 7);
       });
     }
@@ -101,36 +71,32 @@ class ComTimePickerState extends State<ComTimePicker> {
       now.year,
       now.month,
       now.day,
-      _selectedTime.hour,
-      _selectedTime.minute,
+      selectedTime.hour,
+      selectedTime.minute,
     );
     return DateFormat.jm().format(formattedTime);
   }
 
   @override
   Widget build(BuildContext context) {
-    final timeString = _getFormattedTime();
-    log(timeString);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: ds13, vertical: ds8),
       margin: const EdgeInsets.symmetric(vertical: ds6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(ds8),
-        border: Border.all(color: ComColors.black500, width: ds1),
+        border: Border.all(color: borderColor, width: ds1),
       ),
       child: Row(
         children: [
-          _buildTimeInput(internalControllerHour!, 'Hora'),
-          space8,
+          _buildTimeInput(hourController, 'Hora'),
+          const SizedBox(width: ds8),
           Text(':', style: ComTextStyle.h5),
-          space8,
-          _buildTimeInput(internalControllerMinutes!, 'Mts.'),
+          const SizedBox(width: ds8),
+          _buildTimeInput(minutesController, 'Mts.'),
           const Spacer(),
           _buildMeridiemText(matchMeridiem),
           const Spacer(),
-          space8,
-          _buildInstructionButton()
+          _buildTimePickerButton(),
         ],
       ),
     );
@@ -142,22 +108,35 @@ class ComTimePickerState extends State<ComTimePicker> {
       padding: const EdgeInsets.symmetric(horizontal: ds8),
       decoration: BoxDecoration(
         color: ComColors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(ds8),
         border: Border.all(
-          color: ComColors.black500,
+          color: borderColor,
           width: ds1,
         ),
       ),
       child: TextField(
         controller: controller,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(2),
+          FilteringTextInputFormatter.digitsOnly,
+        ],
         textAlign: TextAlign.center,
         style: ComTextStyle.h6,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: ds6, bottom: ds2),
+          contentPadding: const EdgeInsets.symmetric(vertical: ds6),
           border: InputBorder.none,
           labelText: label,
           labelStyle: ComTextStyle.caption.white800,
         ),
+        onChanged: (value) {
+          setState(() {
+            if (value.isNotEmpty) {
+              borderColor = ComColors.green500;
+            } else {
+              borderColor = ComColors.red500;
+            }
+          });
+        },
       ),
     );
   }
@@ -169,27 +148,19 @@ class ComTimePickerState extends State<ComTimePicker> {
     );
   }
 
-  Widget _buildInstructionButton() {
+  Widget _buildTimePickerButton() {
     return InkWell(
       onTap: _pickTime,
       child: Container(
         padding: const EdgeInsets.all(ds8),
-        constraints: const BoxConstraints(maxWidth: ds200),
         decoration: BoxDecoration(
-          color: ComColors.blue200,
-          borderRadius: BorderRadius.circular(ds8),
+          color: ComColors.blue600,
+          shape: BoxShape.circle,
         ),
-        child: Container(
-          padding: const EdgeInsets.all(ds8),
-          decoration: BoxDecoration(
-            color: ComColors.blue600,
-            borderRadius: BorderRadius.circular(ds20),
-          ),
-          child: const Icon(
-            Icons.access_time,
-            color: Colors.white,
-            size: 20,
-          ),
+        child: const Icon(
+          Icons.access_time,
+          color: Colors.white,
+          size: 20,
         ),
       ),
     );

@@ -150,8 +150,11 @@ class _ComDatePickerState extends State<ComDatePicker> {
           TextField(
             controller: _dateController,
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
+              FilteringTextInputFormatter.digitsOnly, // Solo dígitos
               TextInputFormatter.withFunction((oldValue, newValue) {
+                if (newValue.text.length > 10) {
+                  return oldValue;
+                }
                 final formatted = _formatInput(newValue.text);
                 return TextEditingValue(
                   text: formatted,
