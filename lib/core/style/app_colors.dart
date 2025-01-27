@@ -5,7 +5,9 @@ class ComColors {
   static const Color pri100 = Color(0xFFE6FCF7);
   static const Color pri200 = Color(0xFFCCF9EF);
   static const Color pri300 = Color(0xFF99F3E0);
+
   static const Color pri400 = Color(0xFF66ECD0);
+  static const Color inf1100 = Color(0xFF50E3C2);
   static const Color pri500 = Color(0xFF33E6C1);
   static const Color pri600 = Color(0xFF00E0B1);
   static const Color pri700 = Color(0xFF00B38E);
@@ -102,7 +104,7 @@ class ComColors {
   static const Color inf200 = Color(0xFFE5EEFD);
   static const Color inf300 = Color(0xFFC7DBFA);
   static const Color inf400 = Color(0xFFA3C7F8);
-  static const Color inf500 = Color(0xFF76B0F5);
+  static const Color inf500 = Color(0xFF38b6ff);
   static const Color inf600 = Color(0xFF2196F3);
   static const Color inf700 = Color(0xFF1E86D9);
   static const Color inf800 = Color(0xFF1A74BC);

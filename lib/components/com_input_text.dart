@@ -13,6 +13,8 @@ class ComInputText extends StatefulWidget {
     this.keyboardType = TextInputType.number,
     this.readOnly = false,
     this.paddingContent = const EdgeInsets.symmetric(vertical: ds8),
+    this.initialValue,
+    this.fontSize,
     super.key,
   });
 
@@ -25,6 +27,8 @@ class ComInputText extends StatefulWidget {
   final Function(String)? onChangedText;
   final bool readOnly;
   final EdgeInsets paddingContent;
+  final String? initialValue;
+  final double? fontSize;
 
   @override
   State<ComInputText> createState() => _ComInputTextState();
@@ -41,11 +45,16 @@ class _ComInputTextState extends State<ComInputText> {
     borderColor = widget.borderColor ?? ComColors.sec500;
     internalController = widget.controller ?? TextEditingController();
 
+    // Asignar el valor inicial si está definido
+
     internalController!.addListener(() {
       if (mounted) {
         setState(() {
           if (internalController!.text.isEmpty) {
             borderColor = ComColors.sec500;
+          }
+          if (widget.initialValue != null) {
+            internalController!.text = widget.initialValue!;
           }
         });
       }
@@ -66,7 +75,8 @@ class _ComInputTextState extends State<ComInputText> {
       padding: widget.paddingContent,
       child: TextFormField(
         controller: widget.controller,
-        style: ComTextStyle.body3.w400.gs1000,
+        style:
+            ComTextStyle.body3.w400.gs1000.copyWith(fontSize: widget.fontSize),
         decoration: InputDecoration(
           labelText: widget.labelText,
           labelStyle: ComTextStyle.caption.gs800,
@@ -93,7 +103,6 @@ class _ComInputTextState extends State<ComInputText> {
           ),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: ds16,
-            vertical: ds8,
           ),
         ),
         readOnly: widget.readOnly,

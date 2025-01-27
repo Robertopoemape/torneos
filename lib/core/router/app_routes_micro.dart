@@ -10,9 +10,10 @@ class MicroAppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: HomeRoute.page,
+          page: SplashRoute.page,
           initial: true,
         ),
+        AutoRoute(page: HomeRoute.page),
         AutoRoute(page: RegisterSetsVballRoute.page),
         AutoRoute(page: TablePointsVoleyRoute.page),
         AutoRoute(page: TableResultVoleyRoute.page),

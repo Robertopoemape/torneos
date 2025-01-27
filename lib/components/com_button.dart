@@ -5,7 +5,7 @@ import '../core/core.dart';
 class ComButton extends StatelessWidget {
   const ComButton({
     required this.onPressed,
-    required this.text,
+    this.text = '',
     this.alignment = Alignment.centerLeft,
     this.backgroundColor = ComColors.succ500,
     this.labelColor = ComColors.gsWhite,
@@ -15,6 +15,8 @@ class ComButton extends StatelessWidget {
     this.width,
     this.isActivatedIcon = false,
     this.icon = Icons.add,
+    this.size = ds24,
+    this.borderRadius = ds8,
     super.key,
   });
 
@@ -29,6 +31,8 @@ class ComButton extends StatelessWidget {
   final double? width;
   final bool isActivatedIcon;
   final IconData icon;
+  final double size;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class ComButton extends StatelessWidget {
           padding: padding,
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(ds8),
+            borderRadius: BorderRadius.circular(borderRadius),
             side: BorderSide(
               color: borderColor,
               width: ds1,
@@ -57,13 +61,15 @@ class ComButton extends StatelessWidget {
               Icon(
                 icon,
                 color: labelColor,
+                size: size,
               ),
+            ] else ...[
               space8,
-            ],
-            Text(
-              text,
-              style: ComTextStyle.button1.copyWith(color: labelColor),
-            ),
+              Text(
+                text,
+                style: ComTextStyle.button1.copyWith(color: labelColor),
+              ),
+            ]
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../components/com_time_picker.dart';
 import '../../../components/components.dart';
 import '../../../core/core.dart';
 import '../register_tournament.dart';
@@ -99,10 +100,7 @@ class RegisterTournamentScreenState extends State<RegisterTournamentScreen> {
                               labelText: 'Fecha de Inicio',
                               onDateSelected: (date) {},
                             ),
-                            _buildTextInput(
-                              controller: controller.matchHourController,
-                              labelText: 'Hora del Partido',
-                            ),
+                            ComTimePicker(),
                             _buildTextInput(
                               controller: controller.teamLocalController,
                               labelText: 'Equipo Local',
