@@ -107,7 +107,6 @@ class _ComTimePickerState extends State<ComTimePicker> {
       width: ds50,
       padding: const EdgeInsets.symmetric(horizontal: ds8),
       decoration: BoxDecoration(
-        color: ComColors.white,
         borderRadius: BorderRadius.circular(ds8),
         border: Border.all(
           color: borderColor,

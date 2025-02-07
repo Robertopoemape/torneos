@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_torneos/core/core.dart';
 import 'package:proyecto_torneos/firebase_options.dart';
 
-import 'core/router/router_provider_micro.dart';
-
 final appRouter = MicroAppRouter();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

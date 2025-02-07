@@ -20,5 +20,6 @@ class MicroAppRouter extends RootStackRouter {
         AutoRoute(page: RegisterTeamVballRoute.page),
         AutoRoute(page: TournamentDetailRoute.page),
         AutoRoute(page: RegisterTournamentRoute.page),
+        //    AutoRoute(page: ComLocationRoute.page)
       ];
 }

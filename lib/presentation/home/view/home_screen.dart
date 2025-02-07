@@ -43,7 +43,9 @@ class HomeScreenContent extends StatelessWidget {
               MenuItems(
                 title: 'Registro de puntos',
                 icon: Icons.add,
-                onOptionSelected: () {},
+                onOptionSelected: () {
+                  //   autoRouterPush(context, ComLocationRoute());
+                },
               ),
               MenuItems(
                 title: 'Tabla de puntos',
