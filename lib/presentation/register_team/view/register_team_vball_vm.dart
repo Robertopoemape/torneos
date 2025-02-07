@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../core/methods/methods.dart';
 import '../../../src/models/player_data.dart';
 import '../controller/register_team_vball_controller.dart';
 
@@ -89,20 +90,8 @@ class RegisterTeamVm with ChangeNotifier {
     }
   }
 
-  Future<bool> requestCameraPermission() async {
-    var statusCamera = await Permission.camera.request();
-    if (statusCamera.isGranted) {
-      log("Permiso concedido para la cámara");
-      return true;
-    } else {
-      log("Permiso no concedido para la cámara");
-      await openPermissionSettings();
-      return false;
-    }
-  }
-
   Future<void> openGallery() async {
-    if (await requestCameraPermission()) {
+    if (await PermissionHandler.camera()) {
       XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
       if (imageFile != null) {
         imgFileUpload = File(imageFile.path);
@@ -114,7 +103,7 @@ class RegisterTeamVm with ChangeNotifier {
   }
 
   Future<void> openCamera() async {
-    if (await requestCameraPermission()) {
+    if (await PermissionHandler.camera()) {
       XFile? imageFile = await picker.pickImage(source: ImageSource.camera);
       if (imageFile != null) {
         imgFileUpload = File(imageFile.path);
